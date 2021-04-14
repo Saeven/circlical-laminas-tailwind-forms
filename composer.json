@@ -1,0 +1,42 @@
+{
+  "name": "saeven/circlical-laminas-tailwindcss",
+  "description": "Build forms the Tailwind Way with Laminas",
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/Saeven/circlical-laminas-tailwindcss",
+  "keywords": [
+    "laminas",
+    "tailwindcss",
+    "tailwind",
+    "form",
+    "forms"
+  ],
+  "authors": [
+    {
+      "name": "Alexandre Lemaire",
+      "email": "alemaire@circlical.com",
+      "homepage": "http://circlical.com/",
+      "role": "Developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {
+    "php": "^7.4",
+    "laminas/laminas-servicemanager": "^3.0.1",
+    "laminas/laminas-form": "*",
+    "laminas/laminas-config": "*",
+    "laminas/laminas-i18n": "*",
+    "laminas/laminas-view": "*",
+    "laminas/laminas-escaper": "*",
+    "laminas/laminas-mvc": "*"
+  },
+  "require-dev": {
+    "phpspec/prophecy-phpunit": "^2.0",
+    "phpunit/phpunit": "^9.4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Circlical\\TailwindForms\\": "src/"
+    }
+  }
+}
