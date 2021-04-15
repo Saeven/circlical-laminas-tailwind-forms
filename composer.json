@@ -3,7 +3,7 @@
   "description": "Build forms the Tailwind Way with Laminas",
   "type": "library",
   "license": "MIT",
-  "homepage": "https://github.com/Saeven/circlical-laminas-tailwindcss",
+  "homepage": "https://github.com/Saeven/circlical-laminas-tailwind-forms",
   "keywords": [
     "laminas",
     "tailwindcss",
