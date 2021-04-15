@@ -7,6 +7,7 @@ use Traversable;
 
 class Form extends \Laminas\Form\Form
 {
+    public const ELEMENT_ERROR_CLASS = 'elementErrorClass';
     public const ELEMENT_LABEL_CLASS = 'elementLabelClass';
     public const ELEMENT_CLASS = 'elementClass';
 
@@ -30,6 +31,13 @@ class Form extends \Laminas\Form\Form
         if ($elementClass) {
             $elementOrFieldset->setAttribute(
                 'class', $elementClass
+            );
+        }
+
+        $elementErrorClass = $this->getOption(self::ELEMENT_ERROR_CLASS);
+        if ($elementErrorClass) {
+            $elementOrFieldset->setOption(
+                self::ELEMENT_ERROR_CLASS, $elementErrorClass
             );
         }
 

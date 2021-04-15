@@ -3,7 +3,6 @@
 namespace Circlical\TailwindForms\Form\View\Helper;
 
 use Laminas\Form\ElementInterface;
-use Laminas\Form\LabelAwareInterface;
 
 class FormRow extends \Laminas\Form\View\Helper\FormRow
 {
@@ -12,6 +11,7 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $labelHelper = $this->getLabelHelper();
         $elementHelper = $this->getElementHelper();
+        $elementErrorsHelper = $this->getElementErrorsHelper();
         $label = $element->getLabel();
 
         $type = $element->getAttribute('type');
@@ -23,18 +23,21 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
             $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
         }
 
+        if ($this->renderErrors) {
+            $elementErrors = $elementErrorsHelper->render($element);
+        }
 
         return sprintf(
             <<< ENDTEMPLATE
-<div>
-    %s
+<div>%s
     <div class="mt-1">
         %s
-    </div>
+    </div>%s
 </div>
 ENDTEMPLATE,
-            $label,
-            $elementHelper->render($element)
+            $label ? "\n    $label" : '',
+            $elementHelper->render($element),
+            $elementErrors ? "\n    $elementErrors" : ''
         );
     }
 

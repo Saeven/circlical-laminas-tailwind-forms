@@ -1,0 +1,7 @@
+<div>
+    <label class="block&#x20;text-sm&#x20;font-medium&#x20;text-gray-700" for="email">Email</label>
+    <div class="mt-1">
+        <input type="email" name="email" id="email" class="shadow-sm&#x20;focus&#x3A;ring-indigo-500&#x20;focus&#x3A;border-indigo-500&#x20;block&#x20;w-full&#x20;sm&#x3A;text-sm&#x20;border-gray-300&#x20;rounded-md" aria-invalid="true" aria-describedby="email-error" value="helloworld">
+    </div>
+    <p class="mt-2&#x20;text-sm&#x20;text-red-600" id="email-error">The input does not match against pattern '/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'</p>
+</div>
