@@ -3,6 +3,7 @@
 namespace Circlical\TailwindForms;
 
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
+use Circlical\TailwindForms\Form\View\Helper\FormInput;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
 
@@ -12,6 +13,7 @@ return [
             'formtext' => FormText::class,
             'formElement' => FormElement::class,
             'formRow' => FormRow::class,
+            'formInput' => FormInput::class,
         ],
         'aliases' => [
         ],

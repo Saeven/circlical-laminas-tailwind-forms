@@ -15,7 +15,6 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
         $label = $element->getLabel();
 
         $type = $element->getAttribute('type');
-        $id = $element->getAttribute('id') ?: ('autoform-id-' . $element->getName());
 
         if (isset($label) && '' !== $label && $type !== 'hidden') {
             if (!$element->getLabelOption('disable_html_escape')) {
@@ -23,6 +22,7 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
             }
             $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
         }
+
 
         return sprintf(
             <<< ENDTEMPLATE

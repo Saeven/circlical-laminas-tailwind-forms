@@ -8,6 +8,7 @@
 
 namespace Circlical\TailwindFormsTest\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Form;
 use Laminas\Form\Element;
 use Laminas\View\Renderer\PhpRenderer;
 use PHPUnit\Framework\TestCase;
@@ -16,7 +17,6 @@ use Circlical\TailwindFormsTest\Bootstrap;
 class FormRowTest extends TestCase
 {
     public $helper;
-    public $renderer;
 
     protected function setUp(): void
     {
@@ -25,38 +25,49 @@ class FormRowTest extends TestCase
         $this->helper = $oViewHelperPluginManager
             ->get('formRow')
             ->setView($oRenderer->setHelperPluginManager($oViewHelperPluginManager));
-
-//        $this->helper = new FormElementHelper();
-//
-//        Doctype::unsetDoctypeRegistry();
-//
-//        $this->renderer = new PhpRenderer;
-//        $helpers = $this->renderer->getHelperPluginManager();
-//        $config = new HelperConfig();
-//        $config->configureServiceManager($helpers);
-//
-//        $this->helper->setView($this->renderer);
     }
 
-    public function testRendersTextFieldInRow()
+    public function testRendersTextFieldWithLabelInRow()
     {
-        $form = new \Circlical\TailwindForms\Form\Form();
-        $form->setOption(
-            \Circlical\TailwindForms\Form\Form::ELEMENT_LABEL_CLASS,
-            'block text-sm font-medium text-gray-700'
-        );
+        $form = new Form();
+        $form->setOptions([
+            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
+            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
+        ]);
 
         $element = new Element\Text('email');
-        $element->setAttribute('type', 'text');
-        $element->setAttribute('id', 'email');
+        $element->setAttributes([
+            'type' => 'text',
+            'id' => 'email',
+            'placeholder' => 'you@example.com',
+        ]);
         $element->setLabel('Email');
 
         $form->add($element);
-
         $markup = $this->helper->render($element);
 
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_label.txt', $markup);
     }
+
+    public function disabled_testRendersTextFieldInRow()
+    {
+        $form = new Form();
+        $form->setOption(
+            Form::ELEMENT_LABEL_CLASS,
+            'block text-sm font-medium text-gray-700'
+        );
+        $form->add([
+            'name' => 'email',
+            'type' => Element\Text::class,
+            'attributes' => [
+                'id' => 'email',
+            ],
+        ]);
+        $markup = $this->helper->render($form->get('email'));
+
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row.txt', $markup);
+    }
+
 
     public function getMultiElements()
     {
