@@ -2,6 +2,7 @@
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Laminas\Form\Element\Button;
 use Laminas\Form\ElementInterface;
 
 class FormRow extends \Laminas\Form\View\Helper\FormRow
@@ -12,15 +13,17 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
         $labelHelper = $this->getLabelHelper();
         $elementHelper = $this->getElementHelper();
         $elementErrorsHelper = $this->getElementErrorsHelper();
-        $label = $element->getLabel();
-
+        $label = '';
         $type = $element->getAttribute('type');
 
-        if (isset($label) && '' !== $label && $type !== 'hidden') {
-            if (!$element->getLabelOption('disable_html_escape')) {
-                $label = $escapeHtmlHelper($label);
+        if (!$element instanceof Button) {
+            $label = $element->getLabel();
+            if (isset($label) && '' !== $label && $type !== 'hidden') {
+                if (!$element->getLabelOption('disable_html_escape')) {
+                    $label = $escapeHtmlHelper($label);
+                }
+                $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
             }
-            $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
         }
 
         if ($this->renderErrors) {

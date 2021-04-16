@@ -19,6 +19,8 @@ class FormRowTest extends TestCase
 {
     public $helper;
 
+    private $form;
+
     protected function setUp(): void
     {
         $oViewHelperPluginManager = Bootstrap::getServiceManager()->get('ViewHelperManager');
@@ -26,16 +28,17 @@ class FormRowTest extends TestCase
         $this->helper = $oViewHelperPluginManager
             ->get('formRow')
             ->setView($oRenderer->setHelperPluginManager($oViewHelperPluginManager));
+
+        $this->form = new Form();
+        $this->form->setOptions([
+            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
+            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
+            Form::ELEMENT_ERROR_CLASS => 'mt-2 text-sm text-red-600',
+        ]);
     }
 
     public function testRendersTextFieldWithLabelInRow()
     {
-        $form = new Form();
-        $form->setOptions([
-            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
-            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
-        ]);
-
         $element = new Element\Text('email');
         $element->setAttributes([
             'type' => 'text',
@@ -43,8 +46,7 @@ class FormRowTest extends TestCase
             'placeholder' => 'you@example.com',
         ]);
         $element->setLabel('Email');
-
-        $form->add($element);
+        $this->form->add($element);
         $markup = $this->helper->render($element);
 
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_label.txt', $markup);
@@ -52,12 +54,7 @@ class FormRowTest extends TestCase
 
     public function testRendersTextFieldInRow()
     {
-        $form = new Form();
-        $form->setOptions([
-            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
-            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
-        ]);
-        $form->add([
+        $this->form->add([
             'name' => 'email',
             'type' => Element\Text::class,
             'attributes' => [
@@ -65,19 +62,13 @@ class FormRowTest extends TestCase
             ],
         ]);
 
-        $markup = $this->helper->render($form->get('email'));
+        $markup = $this->helper->render($this->form->get('email'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row.txt', $markup);
     }
 
     public function testRendersErrorMessages()
     {
-        $form = new Form();
-        $form->setOptions([
-            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
-            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
-            Form::ELEMENT_ERROR_CLASS => 'mt-2 text-sm text-red-600',
-        ]);
-        $form->add([
+        $this->form->add([
             'name' => 'email',
             'type' => Element\Email::class,
             'attributes' => [
@@ -87,11 +78,25 @@ class FormRowTest extends TestCase
                 'label' => 'Email',
             ],
         ]);
-        $form->setData(['email' => 'helloworld']);
-        $form->isValid();
+        $this->form->setData(['email' => 'helloworld']);
+        $this->form->isValid();
 
-        $markup = $this->helper->render($form->get('email'));
+        $markup = $this->helper->render($this->form->get('email'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_label_error.txt', $markup);
+    }
+
+    public function testRendersButtons()
+    {
+        $this->form->add([
+            'name' => 'foo',
+            'type' => Element\Button::class,
+            'options' => [
+                'label' => 'Submit',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('foo'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_button.txt', $markup);
     }
 
 
