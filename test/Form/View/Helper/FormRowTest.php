@@ -23,18 +23,14 @@ class FormRowTest extends TestCase
 
     protected function setUp(): void
     {
-        $oViewHelperPluginManager = Bootstrap::getServiceManager()->get('ViewHelperManager');
+        $serviceManager = Bootstrap::getServiceManager();
+        $oViewHelperPluginManager = $serviceManager->get('ViewHelperManager');
         $oRenderer = new PhpRenderer();
         $this->helper = $oViewHelperPluginManager
             ->get('formRow')
             ->setView($oRenderer->setHelperPluginManager($oViewHelperPluginManager));
 
-        $this->form = new Form();
-        $this->form->setOptions([
-            Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
-            Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
-            Form::ELEMENT_ERROR_CLASS => 'mt-2 text-sm text-red-600',
-        ]);
+        $this->form = $serviceManager->get('FormElementManager')->get(Form::class, ['theme' => 'default']);
     }
 
     public function testRendersTextFieldWithLabelInRow()

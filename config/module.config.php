@@ -2,6 +2,10 @@
 
 namespace Circlical\TailwindForms;
 
+use Circlical\TailwindForms\Factory\FormDelegatorFactory;
+use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
+use Circlical\TailwindForms\Factory\ThemedFormElementManagerFactory;
+use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
@@ -39,6 +43,30 @@ return [
             FormElement::class => InvokableFactory::class,
             FormRow::class => InvokableFactory::class,
             FormInput::class => InvokableFactory::class,
+        ],
+    ],
+
+    'form_elements' => [
+        'delegators' => [
+            Form::class => [
+                FormDelegatorFactory::class,
+            ],
+        ],
+    ],
+
+    'service_manager' => [
+
+    ],
+
+    'circlical' => [
+        'tailwindcss' => [
+            'form_themes' => [
+                'default' => [
+                    Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
+                    Form::ELEMENT_ERROR_CLASS => 'mt-2 text-sm text-red-600',
+                    Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
+                ],
+            ],
         ],
     ],
 ];
