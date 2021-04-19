@@ -1,5 +1,5 @@
 <div>
     <div class="mt-1">
-        <button type="button" name="foo" class="shadow-sm&#x20;focus&#x3A;ring-indigo-500&#x20;focus&#x3A;border-indigo-500&#x20;block&#x20;w-full&#x20;sm&#x3A;text-sm&#x20;border-gray-300&#x20;rounded-md" value="">Submit</button>
+        <button type="button" name="foo" class="bg-white&#x20;py-2&#x20;px-4&#x20;border&#x20;border-gray-300&#x20;rounded-md&#x20;shadow-sm&#x20;text-sm&#x20;font-medium&#x20;text-gray-700&#x20;hover&#x3A;bg-gray-50&#x20;focus&#x3A;outline-none&#x20;focus&#x3A;ring-2&#x20;focus&#x3A;ring-offset-2&#x20;focus&#x3A;ring-indigo-500" value="">Submit</button>
     </div>
 </div>

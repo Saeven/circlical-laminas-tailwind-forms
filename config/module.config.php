@@ -65,6 +65,10 @@ return [
                     Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
                     Form::ELEMENT_ERROR_CLASS => 'mt-2 text-sm text-red-600',
                     Form::ELEMENT_LABEL_CLASS => 'block text-sm font-medium text-gray-700',
+                    Form::BUTTON_THEMES => [
+                        'primary' => 'ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                        'default' => 'bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500',
+                    ],
                 ],
             ],
         ],

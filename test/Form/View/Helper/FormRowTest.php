@@ -95,6 +95,21 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_button.txt', $markup);
     }
 
+    public function testRendersThemedButtons()
+    {
+        $this->form->add([
+            'name' => 'foo',
+            'type' => Element\Button::class,
+            'options' => [
+                'label' => 'Submit',
+                Form::BUTTON_TYPE => 'primary',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('foo'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_button_primary.txt', $markup);
+    }
+
 
     public function getMultiElements()
     {

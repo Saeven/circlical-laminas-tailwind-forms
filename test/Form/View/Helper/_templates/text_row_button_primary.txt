@@ -1,0 +1,5 @@
+<div>
+    <div class="mt-1">
+        <button type="button" name="foo" class="ml-3&#x20;inline-flex&#x20;justify-center&#x20;py-2&#x20;px-4&#x20;border&#x20;border-transparent&#x20;shadow-sm&#x20;text-sm&#x20;font-medium&#x20;rounded-md&#x20;text-white&#x20;bg-indigo-600&#x20;hover&#x3A;bg-indigo-700&#x20;focus&#x3A;outline-none&#x20;focus&#x3A;ring-2&#x20;focus&#x3A;ring-offset-2&#x20;focus&#x3A;ring-indigo-500" value="">Submit</button>
+    </div>
+</div>
