@@ -1,12 +1,14 @@
 # Themed Forms for Laminas (with optional Tailwind Goodies)
 
 I built this rig to create a standardized "theme" approach to skinning Laminas forms.  In a large team, people can 
-often do things differently, rolling their own CSS.  This puts a stop to this, design considerations were:
+often do things differently, rolling their own CSS.  This puts a stop to this.
 
-* make the system as transparent as possible (no thick overrides)
+Design goals were:
+
+* make the system as transparent as possible (no thick overrides) so that it survives Laminas/Form changes.
 * allow you to define the look of a form with a single parameter (theme)
-* define themes at the config level, in PHP
-* don't interfere when classes are explicitly set
+* enforce that themes are created only at the config level, in PHP
+* don't interfere when classes are explicitly set, in other words, get out of the way if need be
 * smallest footprint possible
 
 # Installation
