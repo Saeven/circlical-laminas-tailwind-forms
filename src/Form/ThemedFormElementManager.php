@@ -2,6 +2,7 @@
 
 namespace Circlical\TailwindForms\Form;
 
+use Interop\Container\ContainerInterface;
 use Laminas\Form\FormElementManager;
 
 class ThemedFormElementManager extends FormElementManager
@@ -15,22 +16,22 @@ class ThemedFormElementManager extends FormElementManager
         $this->formThemes = $config['circlical']['tailwindcss']['form_themes'] ?? [];
     }
 
-    public function get($name, $options = [])
+    public function callElementInit(ContainerInterface $container, $instance)
     {
-        return $this->injectTheme(parent::get($name, $options));
-    }
-
-    private function injectTheme($object)
-    {
-        if ($object instanceof Form) {
-            $theme = 'default';
-            if (($configuredTheme = $object->getOption('theme')) && is_string($configuredTheme) && !empty($this->formThemes[$configuredTheme])) {
-                $theme = $configuredTheme;
-            }
-            $object->setThemeConfiguration($this->formThemes[$theme]);
+        if ($instance instanceof Form) {
+            $this->injectTheme($instance);
         }
 
-        return $object;
+        parent::callElementInit($container, $instance);
+    }
+
+    protected function injectTheme(Form $object): void
+    {
+        $theme = 'default';
+        if (($configuredTheme = $object->getOption('theme')) && is_string($configuredTheme) && !empty($this->formThemes[$configuredTheme])) {
+            $theme = $configuredTheme;
+        }
+        $object->setThemeConfiguration($this->formThemes[$theme]);
     }
 }
 
