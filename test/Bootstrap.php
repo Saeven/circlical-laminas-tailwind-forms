@@ -17,7 +17,7 @@ class Bootstrap
     public static function init()
     {
         // Load the user-defined test configuration file
-        if (!file_exists($sApplicationConfigPath = __DIR__ . '/config/application.config.php')) {
+        if (!is_file($sApplicationConfigPath = __DIR__ . '/config/application.config.php')) {
             throw new \LogicException(sprintf(
                 'Application configuration file "%s" does not exist',
                 $sApplicationConfigPath

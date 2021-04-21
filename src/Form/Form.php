@@ -22,6 +22,10 @@ class Form extends \Laminas\Form\Form
         $this->tailwindThemeData = $tailwindThemeData;
     }
 
+    /**
+     * We propagate theme information to the elements as they are added to the form.  We're limited to doing this
+     * since there is no reference from the element back to the parent.
+     */
     public function add($elementOrFieldset, array $flags = [])
     {
         if (is_array($elementOrFieldset)
@@ -31,6 +35,7 @@ class Form extends \Laminas\Form\Form
         }
 
         parent::add($elementOrFieldset, $flags);
+
         $elementOrFieldset
             ->setLabelAttributes([
                 'class' => $this->tailwindThemeData[self::ELEMENT_LABEL_CLASS] ?? '',

@@ -8,6 +8,7 @@
 
 namespace Circlical\TailwindFormsTest\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\ChildForm;
 use Circlical\TailwindForms\Form\Form;
 use Laminas\Form\Element;
 use Laminas\InputFilter\InputFilter;
@@ -30,7 +31,8 @@ class FormRowTest extends TestCase
             ->get('formRow')
             ->setView($oRenderer->setHelperPluginManager($oViewHelperPluginManager));
 
-        $this->form = $serviceManager->get('FormElementManager')->get(Form::class, ['theme' => 'default']);
+        $formElementManager = $serviceManager->get('FormElementManager');
+        $this->form = $formElementManager->get(ChildForm::class, ['theme' => 'default']);
     }
 
     public function testRendersTextFieldWithLabelInRow()

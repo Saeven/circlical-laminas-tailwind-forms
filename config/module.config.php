@@ -2,15 +2,14 @@
 
 namespace Circlical\TailwindForms;
 
-use Circlical\TailwindForms\Factory\FormDelegatorFactory;
 use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
-use Circlical\TailwindForms\Factory\ThemedFormElementManagerFactory;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
+use Laminas\Form\FormElementManagerFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -46,16 +45,15 @@ return [
         ],
     ],
 
-    'form_elements' => [
+    'service_manager' => [
+        'factories' => [
+//            'FormElementManager' => FormElementManagerFactory::class,
+        ],
         'delegators' => [
-            Form::class => [
-                FormDelegatorFactory::class,
+            'FormElementManager' => [
+                ThemedFormDelegatorFactory::class,
             ],
         ],
-    ],
-
-    'service_manager' => [
-
     ],
 
     'circlical' => [
