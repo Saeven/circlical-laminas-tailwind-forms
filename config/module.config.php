@@ -46,9 +46,6 @@ return [
     ],
 
     'service_manager' => [
-        'factories' => [
-//            'FormElementManager' => FormElementManagerFactory::class,
-        ],
         'delegators' => [
             'FormElementManager' => [
                 ThemedFormDelegatorFactory::class,
