@@ -1,4 +1,4 @@
-# Themed Forms for Laminas (with optional Tailwind Goodies)
+# Themed Forms for Laminas (with optional Tailwind/Alpine Goodies)
 
 I built this rig to create a standardized "theme" approach to skinning Laminas forms.  In a large team, people can 
 often do things differently, rolling their own CSS.  This puts a stop to this.
@@ -10,6 +10,11 @@ Design goals were:
 * enforce that themes are created only at the config level, in PHP
 * don't interfere when classes are explicitly set, in other words, get out of the way if need be
 * smallest footprint possible
+  
+Optional, since very opinionated:
+
+* TODO: automate binding reactive models with AlpineJS 
+* TODO: automate writing XHR fetch scripts for forms, along with error display
 
 # Installation
 
@@ -18,6 +23,13 @@ Coming Soon.
 # Usage
 
 Coming Soon.
+
+## Tested Elements
+
+You can see these behaviors in the unit tests.  So far, I am happy with the support it offers:
+
+* text fields
+* buttons
 
 #### Implementation Notes
 
