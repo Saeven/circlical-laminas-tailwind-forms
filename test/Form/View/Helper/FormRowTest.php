@@ -94,7 +94,7 @@ class FormRowTest extends TestCase
         ]);
 
         $markup = $this->helper->render($this->form->get('foo'));
-        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_button.txt', $markup);
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/button_row.txt', $markup);
     }
 
     public function testRendersThemedButtons()
@@ -109,7 +109,24 @@ class FormRowTest extends TestCase
         ]);
 
         $markup = $this->helper->render($this->form->get('foo'));
-        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/text_row_button_primary.txt', $markup);
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/button_primary_row.txt', $markup);
+    }
+
+    /**
+     * We want to leave hidden fields alone on style.
+     */
+    public function testIgnoresHiddenFields()
+    {
+        $this->form->add([
+            'name' => 'foo',
+            'type' => Element\Hidden::class,
+            'attributes' => [
+                'value' => "bar",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('foo'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/hidden_row.txt', $markup);
     }
 
 

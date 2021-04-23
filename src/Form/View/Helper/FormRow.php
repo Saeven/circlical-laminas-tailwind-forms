@@ -2,6 +2,7 @@
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\ElementInterface;
 
@@ -9,6 +10,10 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
 {
     public function render(ElementInterface $element, $labelPosition = null)
     {
+        if (!ThemeManager::isSupported($element)) {
+            return parent::render($element, $labelPosition);
+        }
+
         $escapeHtmlHelper = $this->getEscapeHtmlHelper();
         $labelHelper = $this->getLabelHelper();
         $elementHelper = $this->getElementHelper();

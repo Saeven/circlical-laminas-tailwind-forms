@@ -32,15 +32,17 @@ class Bootstrap
 
         // Prepare the service manager
         static::$config = $aApplicationConfig;
-        $oServiceManager = new \Laminas\ServiceManager\ServiceManager();
+        $serviceManager = new \Laminas\ServiceManager\ServiceManager();
         $oServiceManagerConfig = new \Laminas\Mvc\Service\ServiceManagerConfig(static::$config['service_manager'] ?? []);
-        $oServiceManagerConfig->configureServiceManager($oServiceManager);
-        $oServiceManager->setService('ApplicationConfig', static::$config);
+        $oServiceManagerConfig->configureServiceManager($serviceManager);
+        $serviceManager->setService('ApplicationConfig', static::$config);
 
         // Load modules
-        $oServiceManager->get('ModuleManager')->loadModules();
+        $serviceManager->get('ModuleManager')->loadModules();
+        $application = $serviceManager->get('Application');
+        $application->bootstrap();
 
-        static::$serviceManager = $oServiceManager;
+        static::$serviceManager = $serviceManager;
     }
 
     public static function getServiceManager(): ServiceManager

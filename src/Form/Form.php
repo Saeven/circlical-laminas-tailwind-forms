@@ -2,6 +2,7 @@
 
 namespace Circlical\TailwindForms\Form;
 
+use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\ElementInterface;
 use Traversable;
@@ -28,13 +29,15 @@ class Form extends \Laminas\Form\Form
      */
     public function add($elementOrFieldset, array $flags = [])
     {
-        if (is_array($elementOrFieldset)
-            || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)
-        ) {
+        if (is_array($elementOrFieldset) || ($elementOrFieldset instanceof Traversable && !$elementOrFieldset instanceof ElementInterface)) {
             $elementOrFieldset = $this->getFormFactory()->create($elementOrFieldset);
         }
 
         parent::add($elementOrFieldset, $flags);
+
+        if (!ThemeManager::isSupported($elementOrFieldset)) {
+            return $this;
+        }
 
         $elementOrFieldset
             ->setLabelAttributes([

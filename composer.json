@@ -27,7 +27,9 @@
     "laminas/laminas-config": "*",
     "laminas/laminas-i18n": "*",
     "laminas/laminas-view": "*",
+    "laminas/laminas-modulemanager": "*",
     "laminas/laminas-escaper": "*",
+    "laminas/laminas-eventmanager": "*",
     "laminas/laminas-mvc": "*"
   },
   "require-dev": {

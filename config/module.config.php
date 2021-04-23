@@ -2,6 +2,7 @@
 
 namespace Circlical\TailwindForms;
 
+use Circlical\TailwindForms\Factory\Form\View\Helper\FormRowFactory;
 use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
@@ -9,6 +10,11 @@ use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
+use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Email;
+use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Text;
 use Laminas\Form\FormElementManagerFactory;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
@@ -55,6 +61,14 @@ return [
 
     'circlical' => [
         'tailwindcss' => [
+            'supported_form_elements' => [
+                Email::class,
+                Button::class,
+                Password::class,
+                Submit::class,
+                Text::class,
+            ],
+
             'form_themes' => [
                 'default' => [
                     Form::ELEMENT_CLASS => 'shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md',
