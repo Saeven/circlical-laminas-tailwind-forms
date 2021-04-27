@@ -112,6 +112,22 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/button_primary_row.txt', $markup);
     }
 
+    public function testRendersThemedButtonsWithAddedClasses()
+    {
+        $this->form->add([
+            'name' => 'foo',
+            'type' => Element\Button::class,
+            'options' => [
+                'label' => 'Submit',
+                Form::BUTTON_TYPE => 'primary',
+                FORM::ADD_CLASSES => 'w-full',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('foo'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/button_primary_row_full.txt', $markup);
+    }
+
     public function testIgnoresHiddenFields()
     {
         $this->form->add([
@@ -125,47 +141,4 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('foo'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/hidden_row.txt', $markup);
     }
-
-    public function getMultiElements()
-    {
-        return [
-//            ['radio', 'input', 'type="radio"'],
-//            ['multi_checkbox', 'input', 'type="checkbox"'],
-//            ['select', 'option', '<select'],
-        ];
-    }
-
-    /**
-     * @dataProvider getMultiElements
-     * @group        multi
-     */
-//    public function testRendersMultiElementsAsExpected($type, $inputType, $additionalMarkup)
-//    {
-//        if ($type === 'radio') {
-//            $element = new Element\Radio('foo');
-//            $this->assertEquals('radio', $element->getAttribute('type'));
-//        } elseif ($type === 'multi_checkbox') {
-//            $element = new Element\MultiCheckbox('foo');
-//            $this->assertEquals('multi_checkbox', $element->getAttribute('type'));
-//        } elseif ($type === 'select') {
-//            $element = new Element\Select('foo');
-//            $this->assertEquals('select', $element->getAttribute('type'));
-//        } else {
-//            $element = new Element('foo');
-//        }
-//        $element->setAttribute('type', $type);
-//        $element->setValueOptions([
-//            'value1' => 'option',
-//            'value2' => 'label',
-//            'value3' => 'last',
-//        ]);
-//        $element->setAttribute('value', 'value2');
-//        $markup = $this->helper->render($element);
-//
-//        $this->assertEquals(3, substr_count($markup, '<' . $inputType), $markup);
-//        $this->assertStringContainsString($additionalMarkup, $markup);
-//        if ($type == 'select') {
-//            $this->assertMatchesRegularExpression('#value="value2"[^>]*?(selected="selected")#', $markup);
-//        }
-//    }
 }

@@ -15,6 +15,7 @@ class Form extends \Laminas\Form\Form
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
     public const BUTTON_THEME_DEFAULT = 'default';
+    public const ADD_CLASSES = 'addClasses';
 
     private ?array $tailwindThemeData;
 
@@ -51,6 +52,11 @@ class Form extends \Laminas\Form\Form
                 $theme = $theme = $elementOrFieldset->getOption(self::BUTTON_TYPE);
                 $class = $this->tailwindThemeData[self::BUTTON_THEMES][!empty($this->tailwindThemeData[self::BUTTON_THEMES][$theme]) ? $theme : self::BUTTON_THEME_DEFAULT];
             }
+
+            if ($addedClasses = $elementOrFieldset->getOption(self::ADD_CLASSES)) {
+                $class .= ' ' . $addedClasses;
+            }
+
             $elementOrFieldset->setAttribute('class', $class);
         }
 
