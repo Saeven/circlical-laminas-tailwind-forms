@@ -16,12 +16,20 @@ class Form extends \Laminas\Form\Form
     public const BUTTON_TYPE = 'buttonType';
     public const BUTTON_THEME_DEFAULT = 'default';
     public const ADD_CLASSES = 'addClasses';
+    public const OPTION_ADD_ALPINEJS_MARKUP = 'option_alpine_markup';
 
     private ?array $tailwindThemeData;
+
+    private bool $generateAlpineMarkup = false;
 
     public function setThemeConfiguration(array $tailwindThemeData): void
     {
         $this->tailwindThemeData = $tailwindThemeData;
+    }
+
+    public function setGenerateAlpineMarkup(bool $generateAlpineMarkup): void
+    {
+        $this->generateAlpineMarkup = $generateAlpineMarkup;
     }
 
     /**
@@ -46,6 +54,19 @@ class Form extends \Laminas\Form\Form
             ])
             ->setOption(self::ELEMENT_ERROR_CLASS, $this->tailwindThemeData[self::ELEMENT_ERROR_CLASS] ?? '');
 
+
+        //
+        // 1. Are we in "Alpine" mode?
+        //
+        $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup);
+        if ($this->generateAlpineMarkup) {
+            $elementOrFieldset->setAttribute('x-model', "data." . $elementOrFieldset->getName());
+        }
+
+
+        //
+        // 2. Assert the class by theme, setting it outright, or appending
+        //
         if (!$elementOrFieldset->getAttribute('class')) {
             $class = $this->tailwindThemeData[self::ELEMENT_CLASS] ?? '';
             if ($elementOrFieldset instanceof Button) {

@@ -15,4 +15,10 @@ return [
     'factories' => [
         'Router' => Router\RouterFactory::class,
     ],
+
+    'form_elements' => [
+        'factories' => [
+            \Circlical\TailwindFormsTest\Form\ChildForm::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
+        ],
+    ],
 ];

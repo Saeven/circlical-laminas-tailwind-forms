@@ -2,12 +2,22 @@
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\ElementInterface;
 
 class FormRow extends \Laminas\Form\View\Helper\FormRow
 {
+    protected static string $ALPINE_ERROR_TEMPLATE = <<< ALPINE_ERROR_TEMPLATE
+<div id="{{NAME}}-errors">
+    <template x-for="(error) in errors.{{NAME}}">
+        <p class="{{ERROR-CLASS}}" x-text="error"></p>
+    </template>
+    </div>
+ALPINE_ERROR_TEMPLATE;
+
+
     public function render(ElementInterface $element, $labelPosition = null)
     {
         if (!ThemeManager::isSupported($element)) {
@@ -31,7 +41,14 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
             }
         }
 
-        if ($this->renderErrors) {
+        // Could move this into a custom helper to 'conform', but there's no need I don't think,
+        // since element errors are always bound to structure under Alpine
+        if ($element->getOption(Form::OPTION_ADD_ALPINEJS_MARKUP)) {
+            $elementErrors = strtr(static::$ALPINE_ERROR_TEMPLATE, [
+                '{{NAME}}' => $element->getName(),
+                '{{ERROR-CLASS}}' => $element->getOption(Form::ELEMENT_ERROR_CLASS) ?? '',
+            ]);
+        } elseif ($this->renderErrors) {
             $elementErrors = $elementErrorsHelper->render($element);
         }
 
@@ -48,5 +65,4 @@ ENDTEMPLATE,
             $elementErrors ? "\n    $elementErrors" : ''
         );
     }
-
 }
