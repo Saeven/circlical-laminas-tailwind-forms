@@ -5,7 +5,7 @@
     </div>
     <div id="email-errors">
     <template x-for="(error) in errors.email">
-        <p class="default-form-element error" x-text="error"></p>
+        <p class="default-form-error" x-text="error"></p>
     </template>
     </div>
 </div>

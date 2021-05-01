@@ -1,5 +1,5 @@
 <div>
     <div class="mt-1">
-        <button type="button" name="foo" class="default-form-button-primary&#x20;w-full" value="">Submit</button>
+        <button type="button" name="foo" class="default-form-button-primary&#x20;w-full">Submit</button>
     </div>
 </div>

@@ -4,6 +4,7 @@ namespace Circlical\TailwindForms;
 
 use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
 use Circlical\TailwindForms\Form\Form;
+use Circlical\TailwindForms\Form\View\Helper\FormButton;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
@@ -19,6 +20,10 @@ use Laminas\ServiceManager\Factory\InvokableFactory;
 return [
     'view_helpers' => [
         'aliases' => [
+            'formbutton' => FormButton::class,
+            'form_button' => FormButton::class,
+            'formButton' => FormButton::class,
+            'FormButton' => FormButton::class,
             'form_element' => FormElement::class,
             'formelement' => FormElement::class,
             'formElement' => FormElement::class,
@@ -41,6 +46,7 @@ return [
             'FormText' => FormText::class,
         ],
         'factories' => [
+            FormButton::class => InvokableFactory::class,
             FormElementErrors::class => InvokableFactory::class,
             FormText::class => InvokableFactory::class,
             FormElement::class => InvokableFactory::class,

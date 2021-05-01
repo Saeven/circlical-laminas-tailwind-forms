@@ -4,7 +4,7 @@
         <input type="email" name="email" id="email" class="default-form-element" aria-invalid="true" aria-describedby="email-error" value="helloworld">
     </div>
     <div id="email-error">
-        <p class="default-form-element error">The input does not match against pattern '/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'</p>
-        <p class="default-form-element error">The input is less than 255 characters long</p>
+        <p class="default-form-error">The input does not match against pattern '/^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/'</p>
+        <p class="default-form-error">The input is less than 255 characters long</p>
     </div>
 </div>
