@@ -70,7 +70,7 @@ return [
             'form_themes' => [
                 'default' => [
                     Form::ELEMENT_CLASS => 'default-form-element',
-                    Form::ELEMENT_ERROR_CLASS => 'default-form-element error',
+                    Form::ELEMENT_ERROR_CLASS => 'default-form-error',
                     Form::ELEMENT_LABEL_CLASS => 'default-form-label',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
