@@ -5,6 +5,7 @@ use Laminas\Router;
 return [
     'modules' => [
         'Laminas\Form',
+        'Laminas\InputFilter',
         'Laminas\Router',
         'Circlical\TailwindForms',
     ],

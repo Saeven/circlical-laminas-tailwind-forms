@@ -9,7 +9,7 @@ use Traversable;
 
 class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
 {
-    protected static string $ERROR_TEMPLATE = '<p %s>%s</p>';
+    protected static string $ERROR_TEMPLATE = "<div %s>%s\n    </div>";
 
     public function render(ElementInterface $element, array $attributes = [])
     {
@@ -30,23 +30,22 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
 
 
         $messages = $this->flattenMessages($messages);
-        if (!$messages) {
-            return '';
-        }
-
         $errorBlockId = $element->getAttribute('id') . '-error';
         $element->setAttributes([
             'aria-invalid' => 'true',
             'aria-describedby' => $errorBlockId,
         ]);
 
+        $errorClass = $element->getOption(Form::ELEMENT_ERROR_CLASS) ?? '';
+
         return sprintf(
             static::$ERROR_TEMPLATE,
             $this->createAttributesString([
-                'class' => $element->getOption(Form::ELEMENT_ERROR_CLASS),
                 'id' => $errorBlockId,
             ]),
-            implode("\n", $messages)
+            implode('', array_map(static function (string $message) use ($errorClass) {
+                return sprintf("\n        <p class=\"%s\">%s</p>", $errorClass, $message);
+            }, $messages))
         );
     }
 

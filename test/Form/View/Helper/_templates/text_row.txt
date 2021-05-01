@@ -1,5 +1,5 @@
 <div>
     <div class="mt-1">
-        <input type="text" name="email" id="email" class="shadow-sm&#x20;focus&#x3A;ring-indigo-500&#x20;focus&#x3A;border-indigo-500&#x20;block&#x20;w-full&#x20;sm&#x3A;text-sm&#x20;border-gray-300&#x20;rounded-md">
+        <input type="text" name="email" id="email" class="default-form-element">
     </div>
 </div>

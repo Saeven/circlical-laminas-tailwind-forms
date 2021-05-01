@@ -17,6 +17,7 @@ class Form extends \Laminas\Form\Form
     public const BUTTON_THEME_DEFAULT = 'default';
     public const ADD_CLASSES = 'addClasses';
     public const OPTION_ADD_ALPINEJS_MARKUP = 'option_alpine_markup';
+    public const OPTION_BIND_ERROR_CLASS = 'option_alpine_bind_errors';
 
     private ?array $tailwindThemeData;
 
@@ -61,6 +62,11 @@ class Form extends \Laminas\Form\Form
         $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup);
         if ($this->generateAlpineMarkup) {
             $elementOrFieldset->setAttribute('x-model', "data." . $elementOrFieldset->getName());
+
+            // if there is no class binding, and auto-error binding has not been disabled, enable it
+            if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
+                $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors.%s.length > 0}", $elementOrFieldset->getName()));
+            }
         }
 
 
