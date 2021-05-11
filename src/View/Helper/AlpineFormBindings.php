@@ -12,12 +12,6 @@ class AlpineFormBindings extends AbstractHelper
     public function __invoke(Form $form)
     {
         $errors = [];
-        $populatedData = [];
-
-        if ($form->hasValidated()) {
-            $errors = $form->getMessages();
-            $populatedData = $form->getData();
-        }
         $data = [];
         foreach ($form->getIterator() as $name => $elementOrFieldset) {
             if ($elementOrFieldset instanceof FieldsetInterface) {
@@ -33,9 +27,19 @@ class AlpineFormBindings extends AbstractHelper
             }
 
             $data[$name] = $elementOrFieldset->getValue() ?? '';
+            $errors[$name] = [];
+            if ($form->hasValidated()) {
+                $errors[$name] = array_values($form->getMessages($name));
+            }
         }
 
-        return json_encode(['data' => $data, 'errors' => $errors,], JSON_THROW_ON_ERROR) . ',';
+        return rtrim(
+                substr(
+                    json_encode(['data' => $data, 'errors' => $errors,], JSON_THROW_ON_ERROR),
+                    1,
+                    -1
+                )
+            ) . ',';
     }
 }
 

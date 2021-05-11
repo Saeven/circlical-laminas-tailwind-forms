@@ -49,7 +49,7 @@ class AlpineFormBindingsTest extends TestCase
 
     public function testRendersBindingsWithData()
     {
-        $element = new Element\Text('email');
+        $element = new Element\Email('email');
         $element->setAttributes([
             'type' => 'text',
             'id' => 'email',
@@ -57,7 +57,7 @@ class AlpineFormBindingsTest extends TestCase
         ]);
         $element->setLabel('Email');
         $this->form->add($element);
-        $this->form->setData(['email' => 'test@example.com']);
+        $this->form->setData(['email' => 'invalid']);
         $this->form->isValid();
 
         $markup = $this->helper->__invoke($this->form);

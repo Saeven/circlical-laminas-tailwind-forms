@@ -1,1 +1,1 @@
-{"data":{"email":"test@example.com"},"errors":[]},
+"data":{"email":"invalid"},"errors":{"email":["The input does not match against pattern '\/^[a-zA-Z0-9.!#$%&'*+\\\/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$\/'"]},
