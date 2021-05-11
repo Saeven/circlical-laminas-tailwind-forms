@@ -1,1 +1,1 @@
-{"data":{"email":"test@example.com","id":12},"errors":[]}
+{"data":{"email":"test@example.com","id":12},"errors":[]},

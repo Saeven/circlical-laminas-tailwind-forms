@@ -28,17 +28,14 @@ class AlpineFormBindings extends AbstractHelper
                 continue;
             }
 
-            if( $elementOrFieldset instanceof Element\Button || $elementOrFieldset instanceof Element\Submit){
+            if ($elementOrFieldset instanceof Element\Button || $elementOrFieldset instanceof Element\Submit) {
                 continue;
             }
 
             $data[$name] = $elementOrFieldset->getValue() ?? '';
         }
 
-        return json_encode([
-            'data' => $data,
-            'errors' => $errors,
-        ], JSON_THROW_ON_ERROR);
+        return json_encode(['data' => $data, 'errors' => $errors,], JSON_THROW_ON_ERROR) . ',';
     }
 }
 
