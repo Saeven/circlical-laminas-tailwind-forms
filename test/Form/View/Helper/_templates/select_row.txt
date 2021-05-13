@@ -1,0 +1,10 @@
+<div>
+    <label class="default-form-label" for="location">Location</label>
+    <div class="mt-1">
+        <select name="location" id="location" class="default-form-element">
+<option value="US">USA</option>
+<option value="CA" selected="selected">Canada</option>
+<option value="EU">EU</option>
+</select>
+    </div>
+</div>

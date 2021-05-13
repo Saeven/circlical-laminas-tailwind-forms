@@ -9,11 +9,13 @@ use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
+use Circlical\TailwindForms\Form\View\Helper\FormSelect;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
 use Circlical\TailwindForms\View\Helper\AlpineFormBindings;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
 use Laminas\ServiceManager\Factory\InvokableFactory;
@@ -42,6 +44,10 @@ return [
             'form_row' => FormRow::class,
             'formRow' => FormRow::class,
             'FormRow' => FormRow::class,
+            'formselect' => FormSelect::class,
+            'form_select' => FormSelect::class,
+            'formSelect' => FormSelect::class,
+            'FormSelect' => FormSelect::class,
             'formtext' => FormText::class,
             'form_text' => FormText::class,
             'formText' => FormText::class,
@@ -53,6 +59,7 @@ return [
             FormText::class => InvokableFactory::class,
             FormElement::class => InvokableFactory::class,
             FormRow::class => InvokableFactory::class,
+            FormSelect::class => InvokableFactory::class,
             FormInput::class => InvokableFactory::class,
             AlpineFormBindings::class => InvokableFactory::class,
         ],
@@ -74,6 +81,7 @@ return [
                 Password::class,
                 Submit::class,
                 Text::class,
+                Select::class,
             ],
 
             'form_themes' => [

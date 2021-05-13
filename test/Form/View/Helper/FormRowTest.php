@@ -175,4 +175,27 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('email'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row.txt', $markup);
     }
+
+    public function testRendersSelectFields()
+    {
+        $this->form->add([
+            'name' => 'location',
+            'type' => Element\Select::class,
+            'options' => [
+                'label' => 'Location',
+                'value_options' => [
+                    'US' => 'USA',
+                    'CA' => 'Canada',
+                    'EU' => 'EU',
+                ],
+            ],
+            'attributes' => [
+                'value' => 'CA',
+                'id' => 'location',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('location'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/select_row.txt', $markup);
+    }
 }
