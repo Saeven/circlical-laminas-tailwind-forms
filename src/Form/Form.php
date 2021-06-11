@@ -11,6 +11,7 @@ class Form extends \Laminas\Form\Form
 {
     public const ELEMENT_ERROR_CLASS = 'elementErrorClass';
     public const ELEMENT_LABEL_CLASS = 'elementLabelClass';
+    public const ELEMENT_HELP_BLOCK_CLASS = 'elementHelpBlockClass';
     public const ELEMENT_CLASS = 'elementClass';
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
@@ -18,6 +19,7 @@ class Form extends \Laminas\Form\Form
     public const ADD_CLASSES = 'addClasses';
     public const OPTION_ADD_ALPINEJS_MARKUP = 'option_alpine_markup';
     public const OPTION_BIND_ERROR_CLASS = 'option_alpine_bind_errors';
+    public const OPTION_HELP_BLOCK = 'help-block';
 
     private ?array $tailwindThemeData;
 
@@ -53,7 +55,8 @@ class Form extends \Laminas\Form\Form
             ->setLabelAttributes([
                 'class' => $this->tailwindThemeData[self::ELEMENT_LABEL_CLASS] ?? '',
             ])
-            ->setOption(self::ELEMENT_ERROR_CLASS, $this->tailwindThemeData[self::ELEMENT_ERROR_CLASS] ?? '');
+            ->setOption(self::ELEMENT_ERROR_CLASS, $this->tailwindThemeData[self::ELEMENT_ERROR_CLASS] ?? '')
+            ->setOption(self::ELEMENT_HELP_BLOCK_CLASS, $this->tailwindThemeData[self::ELEMENT_HELP_BLOCK_CLASS] ?? '');
 
 
         //

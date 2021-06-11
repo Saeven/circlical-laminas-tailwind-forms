@@ -89,6 +89,7 @@ return [
                     Form::ELEMENT_CLASS => 'default-form-element',
                     Form::ELEMENT_ERROR_CLASS => 'default-form-error',
                     Form::ELEMENT_LABEL_CLASS => 'default-form-label',
+                    Form::ELEMENT_HELP_BLOCK_CLASS => 'default-form-help-block',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
                         'default' => 'default-form-button',
