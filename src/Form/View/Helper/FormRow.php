@@ -30,6 +30,7 @@ ALPINE_ERROR_TEMPLATE;
         $elementErrorsHelper = $this->getElementErrorsHelper();
         $elementErrors = null;
         $label = '';
+        $helpBlock = '';
         $type = $element->getAttribute('type');
 
         if (!$element instanceof Button) {
@@ -39,6 +40,14 @@ ALPINE_ERROR_TEMPLATE;
                     $label = $escapeHtmlHelper($label);
                 }
                 $label = $labelHelper->openTag($element) . $label . $labelHelper->closeTag();
+            }
+
+            if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
+                $helpBlock = sprintf(
+                    '<p class="%s">%s</p>',
+                    $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
+                    $helpBlockText
+                );
             }
         }
 
@@ -60,11 +69,12 @@ ALPINE_ERROR_TEMPLATE;
 <div>%s
     <div class="mt-1">
         %s
-    </div>%s
+    </div>%s%s
 </div>
 ENDTEMPLATE,
             $label ? "\n    $label" : '',
             $elementHelper->render($element),
+            $helpBlock ? "\n    $helpBlock" : '',
             $elementErrors ? "\n    $elementErrors" : ''
         );
     }

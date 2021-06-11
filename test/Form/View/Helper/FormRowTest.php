@@ -176,6 +176,25 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row.txt', $markup);
     }
 
+    public function testSupportsAlpineModeWithHelpBlocks()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'email',
+            'type' => Element\Text::class,
+            'attributes' => [
+                'id' => 'email',
+            ],
+            'options' => [
+                'label' => "Email",
+                'help-block' => "This is a help block.",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('email'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_help_block.txt', $markup);
+    }
+
     public function testRendersSelectFields()
     {
         $this->form->add([
