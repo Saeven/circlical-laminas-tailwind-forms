@@ -70,7 +70,7 @@ class Form extends \Laminas\Form\Form
 
             // if there is no class binding, and auto-error binding has not been disabled, enable it
             if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
-                $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors.%s.length > 0}", $elementOrFieldset->getName()));
+                $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
             }
         }
 
