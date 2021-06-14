@@ -81,7 +81,7 @@ class Form extends \Laminas\Form\Form
         if (!$elementOrFieldset->getAttribute('class')) {
             $class = $this->tailwindThemeData[self::ELEMENT_CLASS] ?? '';
             if ($elementOrFieldset instanceof Button) {
-                $theme = $theme = $elementOrFieldset->getOption(self::BUTTON_TYPE);
+                $theme = $elementOrFieldset->getOption(self::BUTTON_TYPE);
                 $class = $this->tailwindThemeData[self::BUTTON_THEMES][!empty($this->tailwindThemeData[self::BUTTON_THEMES][$theme]) ? $theme : self::BUTTON_THEME_DEFAULT];
             }
 

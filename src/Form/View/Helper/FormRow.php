@@ -11,7 +11,7 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
 {
     protected static string $ALPINE_ERROR_TEMPLATE = <<< ALPINE_ERROR_TEMPLATE
 <div id="{{NAME}}-errors">
-    <template x-for="(error) in errors.{{NAME}}">
+    <template x-for="(error) in errors['{{NAME}}']">
         <p class="{{ERROR-CLASS}}" x-text="error"></p>
     </template>
     </div>

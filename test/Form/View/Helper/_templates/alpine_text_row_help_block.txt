@@ -5,7 +5,7 @@
     </div>
     <p class="default-form-help-block">This is a help block.</p>
     <div id="email-errors">
-    <template x-for="(error) in errors.email">
+    <template x-for="(error) in errors['email']">
         <p class="default-form-error" x-text="error"></p>
     </template>
     </div>

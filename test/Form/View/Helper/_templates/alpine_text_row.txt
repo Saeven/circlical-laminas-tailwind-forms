@@ -4,7 +4,7 @@
         <input type="text" name="email" id="email" x-model="data&#x5B;&#x27;email&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;email&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-form-element">
     </div>
     <div id="email-errors">
-    <template x-for="(error) in errors.email">
+    <template x-for="(error) in errors['email']">
         <p class="default-form-error" x-text="error"></p>
     </template>
     </div>
