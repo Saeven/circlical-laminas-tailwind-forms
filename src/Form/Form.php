@@ -66,11 +66,11 @@ class Form extends \Laminas\Form\Form
         if ($this->generateAlpineMarkup) {
             if (!$elementOrFieldset instanceof Button) {
                 $elementOrFieldset->setAttribute('x-model', sprintf("data['%s']", $elementOrFieldset->getName()));
-            }
 
-            // if there is no class binding, and auto-error binding has not been disabled, enable it
-            if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
-                $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
+                // if there is no class binding, and auto-error binding has not been disabled, enable it
+                if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
+                    $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
+                }
             }
         }
 
