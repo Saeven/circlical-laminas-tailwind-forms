@@ -4,6 +4,7 @@ namespace Circlical\TailwindForms\Form;
 
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Submit;
 use Laminas\Form\ElementInterface;
 use Traversable;
 
@@ -80,7 +81,7 @@ class Form extends \Laminas\Form\Form
         //
         if (!$elementOrFieldset->getAttribute('class')) {
             $class = $this->tailwindThemeData[self::ELEMENT_CLASS] ?? '';
-            if ($elementOrFieldset instanceof Button) {
+            if ($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit) {
                 $theme = $elementOrFieldset->getOption(self::BUTTON_TYPE);
                 $class = $this->tailwindThemeData[self::BUTTON_THEMES][!empty($this->tailwindThemeData[self::BUTTON_THEMES][$theme]) ? $theme : self::BUTTON_THEME_DEFAULT];
             }
