@@ -1,7 +1,7 @@
 <div>
     <label class="default-form-label" for="email">Email</label>
     <div class="mt-1">
-        <input type="text" name="email" id="email" x-model="data&#x5B;&#x27;email&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;email&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-form-element">
+        <input type="text" name="email" id="email" x-model="data&#x5B;&#x27;email&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;email&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-form-element" value="">
     </div>
     <div id="email-errors">
     <template x-for="(error) in errors['email']">

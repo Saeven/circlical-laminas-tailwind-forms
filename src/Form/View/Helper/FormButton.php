@@ -7,7 +7,7 @@ use Laminas\Form\Exception;
 
 class FormButton extends \Laminas\Form\View\Helper\FormButton
 {
-    public function openTag($attributesOrElement = null)
+    public function openTag($attributesOrElement = null): string
     {
         if (null === $attributesOrElement) {
             return '<button>';

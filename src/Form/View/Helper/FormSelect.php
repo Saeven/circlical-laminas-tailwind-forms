@@ -7,7 +7,7 @@ use Laminas\Form\ElementInterface;
 
 class FormSelect extends \Laminas\Form\View\Helper\FormSelect
 {
-    public function render(ElementInterface $element)
+    public function render(ElementInterface $element): string
     {
         if (!$element instanceof SelectElement) {
             throw new Exception\InvalidArgumentException(sprintf(

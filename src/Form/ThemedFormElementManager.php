@@ -16,7 +16,7 @@ class ThemedFormElementManager extends FormElementManager
         $this->formThemes = $config['circlical']['tailwindcss']['form_themes'] ?? [];
     }
 
-    public function callElementInit(ContainerInterface $container, $instance)
+    public function callElementInit(ContainerInterface $container, $instance): void
     {
         if ($instance instanceof Form) {
             $this->injectTheme($instance);

@@ -11,7 +11,7 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
 {
     protected static string $ERROR_TEMPLATE = "<div %s>%s\n    </div>";
 
-    public function render(ElementInterface $element, array $attributes = [])
+    public function render(ElementInterface $element, array $attributes = []): string
     {
         $messages = $element->getMessages();
         if ($messages instanceof Traversable) {

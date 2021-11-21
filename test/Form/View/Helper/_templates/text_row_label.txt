@@ -1,6 +1,6 @@
 <div>
     <label class="default-form-label" for="email">Email</label>
     <div class="mt-1">
-        <input type="text" name="email" id="email" placeholder="you&#x40;example.com" class="default-form-element">
+        <input type="text" name="email" id="email" placeholder="you&#x40;example.com" class="default-form-element" value="">
     </div>
 </div>

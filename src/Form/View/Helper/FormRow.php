@@ -18,7 +18,7 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
 ALPINE_ERROR_TEMPLATE;
 
 
-    public function render(ElementInterface $element, $labelPosition = null)
+    public function render(ElementInterface $element, $labelPosition = null): string
     {
         if (!ThemeManager::isSupported($element)) {
             return parent::render($element, $labelPosition);

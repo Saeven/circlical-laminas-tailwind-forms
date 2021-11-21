@@ -10,7 +10,7 @@ use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\Factory\FactoryInterface;
 
-class ThemedFormElementManagerFactory extends FormElementManagerFactory
+class ThemedFormElementManagerFactory implements FactoryInterface
 {
     /**
      * {@inheritDoc}
