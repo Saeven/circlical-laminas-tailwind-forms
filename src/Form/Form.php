@@ -65,7 +65,7 @@ class Form extends \Laminas\Form\Form
         //
         $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup);
         if ($this->generateAlpineMarkup) {
-            if (!$elementOrFieldset instanceof Button) {
+            if (!($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit)) {
                 $elementOrFieldset->setAttribute('x-model', sprintf("data['%s']", $elementOrFieldset->getName()));
 
                 // if there is no class binding, and auto-error binding has not been disabled, enable it
