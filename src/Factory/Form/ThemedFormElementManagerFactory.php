@@ -1,23 +1,22 @@
 <?php
 
-namespace Circlical\TailwindForms\Factory\Form;
+declare(strict_types=1);
 
+namespace Circlical\TailwindForms\Factory\Form;
 
 use Circlical\TailwindForms\Form\ThemedFormElementManager;
 use Interop\Container\ContainerInterface;
-use Laminas\Form\FormElementManagerFactory;
-use Laminas\ServiceManager\AbstractPluginManager;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+
+use function is_array;
 
 class ThemedFormElementManagerFactory implements FactoryInterface
 {
     /**
-     * {@inheritDoc}
-     *
-     * @return AbstractPluginManager
+     * @inheritDoc
      */
-    public function __invoke(ContainerInterface $container, $name, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, ?array $options = null)
     {
         $pluginManager = new ThemedFormElementManager($container, $options ?: []);
 
@@ -45,4 +44,3 @@ class ThemedFormElementManagerFactory implements FactoryInterface
         return $pluginManager;
     }
 }
-

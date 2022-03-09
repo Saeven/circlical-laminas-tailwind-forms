@@ -1,14 +1,21 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Form;
 
 use Interop\Container\ContainerInterface;
 use Laminas\Form\FormElementManager;
 
+use function is_string;
+
 class ThemedFormElementManager extends FormElementManager
 {
     private array $formThemes;
 
+    /**
+     * @inheritDoc
+     */
     public function __construct($configInstanceOrParentLocator = null, array $config = [])
     {
         parent::__construct($configInstanceOrParentLocator, $config);
@@ -16,6 +23,9 @@ class ThemedFormElementManager extends FormElementManager
         $this->formThemes = $config['circlical']['tailwindcss']['form_themes'] ?? [];
     }
 
+    /**
+     * @inheritDoc
+     */
     public function callElementInit(ContainerInterface $container, $instance): void
     {
         if ($instance instanceof Form) {
@@ -34,4 +44,3 @@ class ThemedFormElementManager extends FormElementManager
         $object->setThemeConfiguration($this->formThemes[$theme]);
     }
 }
-

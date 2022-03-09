@@ -5,6 +5,7 @@ namespace Circlical\TailwindForms;
 use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormButton;
+use Circlical\TailwindForms\Form\View\Helper\FormCheckbox;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
@@ -13,6 +14,7 @@ use Circlical\TailwindForms\Form\View\Helper\FormSelect;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
 use Circlical\TailwindForms\View\Helper\AlpineFormBindings;
 use Laminas\Form\Element\Button;
+use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Element\Select;
@@ -52,6 +54,10 @@ return [
             'form_text' => FormText::class,
             'formText' => FormText::class,
             'FormText' => FormText::class,
+            'formcheckbox' => FormCheckbox::class,
+            'form_checkbox' => FormCheckbox::class,
+            'formCheckbox' => FormCheckbox::class,
+            'FormCheckbox' => FormCheckbox::class,
         ],
         'factories' => [
             FormButton::class => InvokableFactory::class,
@@ -61,6 +67,7 @@ return [
             FormRow::class => InvokableFactory::class,
             FormSelect::class => InvokableFactory::class,
             FormInput::class => InvokableFactory::class,
+            FormCheckbox::class => InvokableFactory::class,
             AlpineFormBindings::class => InvokableFactory::class,
         ],
     ],
@@ -82,6 +89,7 @@ return [
                 Submit::class,
                 Text::class,
                 Select::class,
+                Checkbox::class,
             ],
 
             'form_themes' => [

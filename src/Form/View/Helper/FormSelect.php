@@ -1,9 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Form\View\Helper;
 
 use Laminas\Form\Element\Select as SelectElement;
 use Laminas\Form\ElementInterface;
+
+use function array_key_exists;
+use function method_exists;
+use function sprintf;
 
 class FormSelect extends \Laminas\Form\View\Helper\FormSelect
 {
@@ -56,6 +62,4 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
 
         return $rendered;
     }
-
 }
-

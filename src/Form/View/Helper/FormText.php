@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Form\View\Helper;
 
 use Laminas\Form\ElementInterface;
@@ -21,4 +23,3 @@ class FormText extends \Laminas\Form\View\Helper\FormText
         return $attributes;
     }
 }
-
