@@ -23,6 +23,7 @@
         <exclude name="WebimpressCodingStandard.Formatting.Reference.UnexpectedSpace"/>
         <exclude name="WebimpressCodingStandard.NamingConventions.ValidVariableName.NotCamelCaps"/>
         <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedIf" />
+        <exclude name="SlevomatCodingStandard.Classes.ModernClassNameReference.ClassNameReferencedViaFunctionCall" />
     </rule>
 
     <rule ref="Generic.Files.LineLength">
