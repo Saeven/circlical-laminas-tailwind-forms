@@ -11,6 +11,7 @@ use Traversable;
 
 use function array_map;
 use function array_walk_recursive;
+use function get_class;
 use function gettype;
 use function implode;
 use function is_array;
@@ -34,7 +35,7 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
             throw new DomainException(sprintf(
                 '%s expects that $element->getMessages() will return an array or Traversable; received "%s"',
                 __METHOD__,
-                is_object($messages) ? $messages::class : gettype($messages)
+                is_object($messages) ? get_class($messages) : gettype($messages)
             ));
         }
 

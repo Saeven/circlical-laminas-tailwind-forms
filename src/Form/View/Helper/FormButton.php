@@ -7,6 +7,7 @@ namespace Circlical\TailwindForms\Form\View\Helper;
 use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception;
 
+use function get_class;
 use function gettype;
 use function is_array;
 use function is_object;
@@ -33,7 +34,7 @@ class FormButton extends \Laminas\Form\View\Helper\FormButton
             throw new Exception\InvalidArgumentException(sprintf(
                 '%s expects an array or Laminas\Form\ElementInterface instance; received "%s"',
                 __METHOD__,
-                is_object($attributesOrElement) ? $attributesOrElement::class : gettype($attributesOrElement)
+                is_object($attributesOrElement) ? get_class($attributesOrElement) : gettype($attributesOrElement)
             ));
         }
 
