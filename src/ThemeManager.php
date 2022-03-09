@@ -1,8 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms;
 
 use Laminas\Form\ElementInterface;
+
+use function in_array;
 
 class ThemeManager
 {
@@ -18,6 +22,6 @@ class ThemeManager
      */
     public static function isSupported(ElementInterface $element): bool
     {
-        return in_array(get_class($element), static::$supportedElements, true);
+        return in_array($element::class, static::$supportedElements, true);
     }
 }

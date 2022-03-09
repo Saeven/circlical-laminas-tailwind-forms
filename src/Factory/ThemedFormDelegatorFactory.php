@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Factory;
 
 use Circlical\TailwindForms\Factory\Form\ThemedFormElementManagerFactory;
-use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\ThemedFormElementManager;
 use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 
 class ThemedFormDelegatorFactory implements DelegatorFactoryInterface
 {
-    public function __invoke(ContainerInterface $container, $name, callable $callback, array $options = null)
+    public function __invoke(ContainerInterface $container, $name, callable $callback, ?array $options = null)
     {
         $factory = new ThemedFormElementManagerFactory();
         $themedFormManager = $factory($container, ThemedFormElementManager::class, $options);
@@ -20,4 +21,3 @@ class ThemedFormDelegatorFactory implements DelegatorFactoryInterface
         return $themedFormManager;
     }
 }
-

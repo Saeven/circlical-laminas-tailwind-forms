@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Form;
 
 use Circlical\TailwindForms\ThemeManager;
@@ -7,6 +9,9 @@ use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\ElementInterface;
 use Traversable;
+
+use function is_array;
+use function sprintf;
 
 class Form extends \Laminas\Form\Form
 {
@@ -39,6 +44,8 @@ class Form extends \Laminas\Form\Form
     /**
      * We propagate theme information to the elements as they are added to the form.  We're limited to doing this
      * since there is no reference from the element back to the parent.
+     *
+     * @inheritDoc
      */
     public function add($elementOrFieldset, array $flags = [])
     {
@@ -59,7 +66,6 @@ class Form extends \Laminas\Form\Form
             ->setOption(self::ELEMENT_ERROR_CLASS, $this->tailwindThemeData[self::ELEMENT_ERROR_CLASS] ?? '')
             ->setOption(self::ELEMENT_HELP_BLOCK_CLASS, $this->tailwindThemeData[self::ELEMENT_HELP_BLOCK_CLASS] ?? '');
 
-
         //
         // 1. Are we in "Alpine" mode?
         //
@@ -74,7 +80,6 @@ class Form extends \Laminas\Form\Form
                 }
             }
         }
-
 
         //
         // 2. Assert the class by theme, setting it outright, or appending

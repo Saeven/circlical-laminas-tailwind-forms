@@ -13,7 +13,6 @@ use PHPUnit\Framework\TestCase;
 class AlpineFormBindingsTest extends TestCase
 {
     private ?Form $form;
-
     private ?AlpineFormBindings $helper;
 
     protected function setUp(): void
@@ -91,7 +90,7 @@ class AlpineFormBindingsTest extends TestCase
             'type' => Element\Button::class,
             'options' => [
                 'label' => 'Cancel',
-            ]
+            ],
         ]);
 
         $this->form->add([
@@ -99,7 +98,7 @@ class AlpineFormBindingsTest extends TestCase
             'type' => Element\Submit::class,
             'options' => [
                 'value' => 'submit',
-            ]
+            ],
         ]);
 
         $this->form->get('id')->getValue();

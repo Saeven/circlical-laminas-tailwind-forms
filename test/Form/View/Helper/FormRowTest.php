@@ -20,7 +20,6 @@ use Circlical\TailwindFormsTest\Bootstrap;
 class FormRowTest extends TestCase
 {
     public ?FormRow $helper;
-
     private ?Form $form;
 
     protected function setUp(): void
@@ -216,5 +215,23 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($this->form->get('location'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/select_row.txt', $markup);
+    }
+
+    public function testRendersCheckBoxes()
+    {
+        $this->form->add([
+            'name' => 'comments',
+            'type' => Element\Checkbox::class,
+            'options' => [
+                'label' => "New comments",
+                'help-block' => "Get notified when someones posts a comment on a posting.",
+            ],
+            'attributes' => [
+                'id' => 'comments',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('comments'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/checkbox_row_help_block.txt', $markup);
     }
 }

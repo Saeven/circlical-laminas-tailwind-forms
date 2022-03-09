@@ -1,10 +1,9 @@
 <?php
 
-namespace Circlical\TailwindForms\Form\View\Helper;
+declare(strict_types=1);
 
-use Laminas\Form\ElementInterface;
+namespace Circlical\TailwindForms\Form\View\Helper;
 
 class FormElement extends \Laminas\Form\View\Helper\FormElement
 {
-
 }

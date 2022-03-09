@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Circlical\TailwindForms\Form\View\Helper;
 
 use Circlical\TailwindForms\Form\Form;
@@ -7,10 +9,22 @@ use Laminas\Form\ElementInterface;
 use Laminas\Form\Exception\DomainException;
 use Traversable;
 
+use function array_map;
+use function array_walk_recursive;
+use function gettype;
+use function implode;
+use function is_array;
+use function is_object;
+use function iterator_to_array;
+use function sprintf;
+
 class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
 {
-    protected static string $ERROR_TEMPLATE = "<div %s>%s\n    </div>";
+    protected static string $errorTemplate = "<div %s>%s\n    </div>";
 
+    /**
+     * @inheritDoc
+     */
     public function render(ElementInterface $element, array $attributes = []): string
     {
         $messages = $element->getMessages();
@@ -20,14 +34,13 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
             throw new DomainException(sprintf(
                 '%s expects that $element->getMessages() will return an array or Traversable; received "%s"',
                 __METHOD__,
-                is_object($messages) ? get_class($messages) : gettype($messages)
+                is_object($messages) ? $messages::class : gettype($messages)
             ));
         }
 
         if (!$messages) {
             return '';
         }
-
 
         $messages = $this->flattenMessages($messages);
         $errorBlockId = $element->getAttribute('id') . '-error';
@@ -39,7 +52,7 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
         $errorClass = $element->getOption(Form::ELEMENT_ERROR_CLASS) ?? '';
 
         return sprintf(
-            static::$ERROR_TEMPLATE,
+            static::$errorTemplate,
             $this->createAttributesString([
                 'id' => $errorBlockId,
             ]),
@@ -78,6 +91,4 @@ class FormElementErrors extends \Laminas\Form\View\Helper\FormElementErrors
 
         return $messagesToPrint;
     }
-
-
 }

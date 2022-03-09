@@ -1,0 +1,13 @@
+<div>
+    <div class="mt-1">
+        <div class="relative flex items-start">
+            <div class="flex items-center h-5">
+                <input type="checkbox" name="comments" id="comments" class="default-form-element" aria-describedby="comments-description" value="1">
+            </div>
+            <div class="ml-3 text-sm">
+                <label class="default-form-label" for="comments">New comments</label>
+                <p id="comments-description" class="default-form-help-block">Get notified when someones posts a comment on a posting.</p>
+            </div>
+        </div>
+    </div>
+</div>
