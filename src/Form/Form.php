@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Circlical\TailwindForms\Form;
 
+use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
@@ -20,6 +21,7 @@ class Form extends \Laminas\Form\Form
     public const ELEMENT_LABEL_CLASS = 'elementLabelClass';
     public const ELEMENT_HELP_BLOCK_CLASS = 'elementHelpBlockClass';
     public const ELEMENT_CHECKBOX_CLASS = 'elementCheckboxClass';
+    public const ELEMENT_TOGGLE_CLASS = 'elementToggleClass';
     public const ELEMENT_CLASS = 'elementClass';
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
@@ -69,16 +71,25 @@ class Form extends \Laminas\Form\Form
             ->setOption(self::ELEMENT_HELP_BLOCK_CLASS, $this->tailwindThemeData[self::ELEMENT_HELP_BLOCK_CLASS] ?? '');
 
         //
-        // 1. Are we in "Alpine" mode?
+        // 1. Are we in "Alpine" mode? Toggle requires Alpine.
         //
-        $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup);
-        if ($this->generateAlpineMarkup) {
+        $elementRequiresAlpine = $elementOrFieldset instanceof Toggle;
+        $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup || $elementRequiresAlpine);
+        if ($this->generateAlpineMarkup || $elementOrFieldset instanceof Toggle) {
             if (!($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit)) {
-                $elementOrFieldset->setAttribute('x-model', sprintf("data['%s']", $elementOrFieldset->getName()));
+                $modelValue = sprintf("data['%s']", $elementOrFieldset->getName());
+                $elementOrFieldset->setAttribute('x-model', $modelValue);
 
                 // if there is no class binding, and auto-error binding has not been disabled, enable it
                 if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
-                    $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
+                    if ($elementOrFieldset instanceof Toggle) {
+                        $elementOrFieldset->setAttribute(
+                            'x-bind:class',
+                            sprintf("{'error': errors['%s'].length > 0, 'active': %s}", $elementOrFieldset->getName(), $modelValue)
+                        );
+                    } else {
+                        $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
+                    }
                 }
             }
         }
@@ -91,6 +102,8 @@ class Form extends \Laminas\Form\Form
             if ($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit) {
                 $theme = $elementOrFieldset->getOption(self::BUTTON_TYPE);
                 $class = $this->tailwindThemeData[self::BUTTON_THEMES][!empty($this->tailwindThemeData[self::BUTTON_THEMES][$theme]) ? $theme : self::BUTTON_THEME_DEFAULT];
+            } elseif ($elementOrFieldset instanceof Toggle) {
+                $class = $this->tailwindThemeData[self::ELEMENT_TOGGLE_CLASS];
             } elseif ($elementOrFieldset instanceof Checkbox) {
                 $class = $this->tailwindThemeData[self::ELEMENT_CHECKBOX_CLASS];
             }

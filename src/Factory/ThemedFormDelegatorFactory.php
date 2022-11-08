@@ -6,8 +6,8 @@ namespace Circlical\TailwindForms\Factory;
 
 use Circlical\TailwindForms\Factory\Form\ThemedFormElementManagerFactory;
 use Circlical\TailwindForms\Form\ThemedFormElementManager;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
+use Psr\Container\ContainerInterface;
 
 class ThemedFormDelegatorFactory implements DelegatorFactoryInterface
 {

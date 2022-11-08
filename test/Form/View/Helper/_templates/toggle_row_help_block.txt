@@ -1,0 +1,19 @@
+<div>
+    <div class="flex items-center">
+        <button
+            x-bind:class="{'error': errors['disable_email_notifications'].length > 0, 'active': data['disable_email_notifications']}"
+            x-model.number="data['disable_email_notifications']" x-on:click="data['disable_email_notifications'] = !data['disable_email_notifications'] | 0"
+            type="button" class="default-form-toggle" role="switch" aria-checked="false">
+            <span aria-hidden="true" class="toggle-control"></span>
+        </button>
+        <div class="ml-3">
+            <label class="default-form-label" for="disable_email_notifications">Disable Email Notifications</label>
+            <span id="disable_email_notifications-description" class="default-form-help-block">Prevent the system from sending emails to learners, for example, when new steps are published.</span>
+        </div>
+    </div>
+    <div id="disable_email_notifications-errors">
+    <template x-for="(error) in errors['disable_email_notifications']">
+        <p class="default-form-error" x-text="error"></p>
+    </template>
+</div>
+</div>

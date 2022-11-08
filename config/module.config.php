@@ -3,6 +3,7 @@
 namespace Circlical\TailwindForms;
 
 use Circlical\TailwindForms\Factory\ThemedFormDelegatorFactory;
+use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormButton;
 use Circlical\TailwindForms\Form\View\Helper\FormCheckbox;
@@ -68,8 +69,13 @@ return [
             FormSelect::class => InvokableFactory::class,
             FormInput::class => InvokableFactory::class,
             FormCheckbox::class => InvokableFactory::class,
-            AlpineFormBindings::class => InvokableFactory::class,
+            AlpineFormBindings::class => InvokableFactory::class
         ],
+    ],
+
+    'form_elements' => [
+        'factories' => [
+        ]
     ],
 
     'service_manager' => [
@@ -90,6 +96,7 @@ return [
                 Text::class,
                 Select::class,
                 Checkbox::class,
+                Toggle::class,
             ],
 
             'form_themes' => [
@@ -99,6 +106,7 @@ return [
                     Form::ELEMENT_LABEL_CLASS => 'default-form-label',
                     Form::ELEMENT_HELP_BLOCK_CLASS => 'default-form-help-block',
                     Form::ELEMENT_CHECKBOX_CLASS => 'default-form-checkbox',
+                    Form::ELEMENT_TOGGLE_CLASS => 'default-form-toggle',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
                         'default' => 'default-form-button',

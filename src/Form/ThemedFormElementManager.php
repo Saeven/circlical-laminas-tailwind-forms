@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Circlical\TailwindForms\Form;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Form\FormElementManager;
+use Psr\Container\ContainerInterface;
 
 use function is_string;
 

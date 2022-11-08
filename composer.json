@@ -48,12 +48,13 @@
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   },
-   "scripts": {
+  "scripts": {
     "check": [
       "@cs",
       "@test"
     ],
     "cs": "mkdir -p tmp && vendor/bin/phpcs",
-    "test": "vendor/bin/phpunit"
+    "test": "vendor/bin/phpunit",
+    "debug": "php -dxdebug.mode=debug -dxdebug.client_host=127.0.0.1 -dxdebug.client_port=9003 -dxdebug.start_with_request=yes ./vendor/bin/phpunit"
   }
 }
