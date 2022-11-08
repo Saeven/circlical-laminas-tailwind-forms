@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\ElementInterface;
+use Laminas\Stdlib\ArrayUtils;
 
 use function preg_replace;
 use function sprintf;
@@ -52,6 +54,24 @@ STANDARD_ELEMENT_TEMPLATE;
 </div>
 CHECKBOX_ELEMENT_TEMPLATE;
 
+    protected static string $toggleElementTemplate = <<<TOGGLE_ELEMENT_TEMPLATE
+<div>
+    <div class="flex items-center">
+        <button
+            x-bind:class="{{BIND}}"
+            x-model.number="{{MODEL}}" x-on:click="{{MODEL}} = !{{MODEL}} | 0"
+            type="button" class="{{TOGGLE_CLASS}}" role="switch" aria-checked="false">
+            <span aria-hidden="true" class="toggle-control"></span>
+        </button>
+        <div class="ml-3">
+            {{LABEL}}
+            {{HELP-BLOCK}}
+        </div>
+    </div>
+    {{ERRORS}}
+</div>
+TOGGLE_ELEMENT_TEMPLATE;
+
     /**
      * @inheritDoc
      */
@@ -81,8 +101,25 @@ CHECKBOX_ELEMENT_TEMPLATE;
         }
 
         $selectedTemplate = static::$standardElementTemplate;
+        $extraTemplateParameters = [];
+
         if ($element instanceof Button) {
             // these aren't the droids you are looking for
+        } elseif ($element instanceof Toggle) {
+            $selectedTemplate = static::$toggleElementTemplate;
+            $label = $this->renderLabel($element);
+            $element->setAttribute('aria-describedby', $element->getName() . '-description');
+            $extraTemplateParameters['{{TOGGLE_CLASS}}'] = $element->getAttribute('class');
+            $extraTemplateParameters['{{BIND}}'] = $element->getAttribute('x-bind:class');
+            $extraTemplateParameters['{{MODEL}}'] = $element->getAttribute('x-model');
+            if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
+                $helpBlock = sprintf(
+                    '<span id="%s-description" class="%s">%s</span>',
+                    $element->getName(),
+                    $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
+                    $helpBlockText
+                );
+            }
         } elseif ($element instanceof Checkbox) {
             // checkbox gets handled a bit differently, because the element helpers don't
             // get any notion of label helpers which carry into translation and so forth.
@@ -111,12 +148,18 @@ CHECKBOX_ELEMENT_TEMPLATE;
             }
         }
 
-        $rendered = strtr($selectedTemplate, [
-            '{{LABEL}}' => $label,
-            '{{ELEMENT}}' => $elementHelper->render($element),
-            '{{HELP-BLOCK}}' => $helpBlock,
-            '{{ERRORS}}' => $elementErrors,
-        ]);
+        $rendered = strtr(
+            $selectedTemplate,
+            ArrayUtils::merge(
+                [
+                    '{{LABEL}}' => $label,
+                    '{{ELEMENT}}' => $elementHelper->render($element),
+                    '{{HELP-BLOCK}}' => $helpBlock,
+                    '{{ERRORS}}' => $elementErrors,
+                ],
+                $extraTemplateParameters
+            )
+        );
 
         return preg_replace('/^\h*\v+/m', '', $rendered);
     }

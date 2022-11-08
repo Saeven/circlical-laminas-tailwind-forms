@@ -19,7 +19,6 @@ return [
 
     'form_elements' => [
         'factories' => [
-            \Circlical\TailwindFormsTest\Form\ChildForm::class => \Laminas\ServiceManager\Factory\InvokableFactory::class,
         ],
     ],
 ];

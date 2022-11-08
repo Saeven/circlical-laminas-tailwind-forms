@@ -8,14 +8,15 @@
 
 namespace Circlical\TailwindFormsTest\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
+use Circlical\TailwindFormsTest\Bootstrap;
 use Laminas\Form\Element;
 use Laminas\InputFilter\InputFilter;
 use Laminas\Validator\StringLength;
 use Laminas\View\Renderer\PhpRenderer;
 use PHPUnit\Framework\TestCase;
-use Circlical\TailwindFormsTest\Bootstrap;
 
 class FormRowTest extends TestCase
 {
@@ -135,7 +136,7 @@ class FormRowTest extends TestCase
             'options' => [
                 'label' => 'Submit',
                 Form::BUTTON_TYPE => 'primary',
-                FORM::ADD_CLASSES => 'w-full',
+                Form::ADD_CLASSES => 'w-full',
             ],
         ]);
 
@@ -233,5 +234,24 @@ class FormRowTest extends TestCase
 
         $markup = $this->helper->render($this->form->get('comments'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/checkbox_row_help_block.txt', $markup);
+    }
+
+    public function testRendersToggles()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'disable_email_notifications',
+            'type' => Toggle::class,
+            'options' => [
+                'label' => "Disable Email Notifications",
+                'help-block' => "Prevent the system from sending emails to learners, for example, when new steps are published.",
+            ],
+            'attributes' => [
+                'id' => 'disable_email_notifications',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('disable_email_notifications'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/toggle_row_help_block.txt', $markup);
     }
 }

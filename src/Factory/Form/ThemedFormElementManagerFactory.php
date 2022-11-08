@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Circlical\TailwindForms\Factory\Form;
 
 use Circlical\TailwindForms\Form\ThemedFormElementManager;
-use Interop\Container\ContainerInterface;
 use Laminas\ServiceManager\Config;
 use Laminas\ServiceManager\Factory\FactoryInterface;
+use Psr\Container\ContainerInterface;
 
 use function is_array;
 
