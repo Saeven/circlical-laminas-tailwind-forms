@@ -60,7 +60,7 @@ CHECKBOX_ELEMENT_TEMPLATE;
         <button
             x-bind:class="{{BIND}}"
             x-model.number="{{MODEL}}" x-on:click="{{MODEL}} = !{{MODEL}} | 0"
-            type="button" class="{{TOGGLE_CLASS}}" role="switch" aria-checked="false">
+            type="button" class="{{TOGGLE_CLASS}}" role="switch" :aria-checked="{{MODEL}}">
             <span aria-hidden="true" class="toggle-control"></span>
         </button>
         <div class="ml-3">

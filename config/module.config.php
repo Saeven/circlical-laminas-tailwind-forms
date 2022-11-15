@@ -21,6 +21,7 @@ use Laminas\Form\Element\Password;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
+use Laminas\Form\Element\Textarea;
 use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -105,8 +106,8 @@ return [
                 Select::class,
                 Checkbox::class,
                 Toggle::class,
+                Textarea::class,
             ],
-
             'form_themes' => [
                 'default' => [
                     Form::ELEMENT_CLASS => 'default-form-element',
@@ -115,6 +116,7 @@ return [
                     Form::ELEMENT_HELP_BLOCK_CLASS => 'default-form-help-block',
                     Form::ELEMENT_CHECKBOX_CLASS => 'default-form-checkbox',
                     Form::ELEMENT_TOGGLE_CLASS => 'default-form-toggle',
+                    Form::ELEMENT_TEXTAREA_CLASS => 'default-form-textarea',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
                         'default' => 'default-form-button',
