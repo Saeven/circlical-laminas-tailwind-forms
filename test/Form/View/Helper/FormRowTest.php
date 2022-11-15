@@ -254,4 +254,24 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('disable_email_notifications'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/toggle_row_help_block.txt', $markup);
     }
+
+    public function testRendersTextArea()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'comment',
+            'type' => Element\Textarea::class,
+            'attributes' => [
+                'id' => 'comment',
+                'rows' => 4,
+            ],
+            'options' => [
+                'label' => "Comment",
+                'help-block' => "This is a help block.",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('comment'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_textarea_row_help_block.txt', $markup);
+    }
 }

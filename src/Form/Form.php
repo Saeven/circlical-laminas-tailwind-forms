@@ -9,6 +9,7 @@ use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Submit;
+use Laminas\Form\Element\Textarea;
 use Laminas\Form\ElementInterface;
 use Traversable;
 
@@ -22,6 +23,7 @@ class Form extends \Laminas\Form\Form
     public const ELEMENT_HELP_BLOCK_CLASS = 'elementHelpBlockClass';
     public const ELEMENT_CHECKBOX_CLASS = 'elementCheckboxClass';
     public const ELEMENT_TOGGLE_CLASS = 'elementToggleClass';
+    public const ELEMENT_TEXTAREA_CLASS = 'elementTextAreaClass';
     public const ELEMENT_CLASS = 'elementClass';
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
@@ -106,6 +108,8 @@ class Form extends \Laminas\Form\Form
                 $class = $this->tailwindThemeData[self::ELEMENT_TOGGLE_CLASS];
             } elseif ($elementOrFieldset instanceof Checkbox) {
                 $class = $this->tailwindThemeData[self::ELEMENT_CHECKBOX_CLASS];
+            } elseif ($elementOrFieldset instanceof Textarea) {
+                $class = $this->tailwindThemeData[self::ELEMENT_TEXTAREA_CLASS];
             }
 
             if ($addedClasses = $elementOrFieldset->getOption(self::ADD_CLASSES)) {
