@@ -10,6 +10,7 @@ use Circlical\TailwindForms\Form\View\Helper\FormCheckbox;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
+use Circlical\TailwindForms\Form\View\Helper\FormRadio;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
 use Circlical\TailwindForms\Form\View\Helper\FormSelect;
 use Circlical\TailwindForms\Form\View\Helper\FormText;
@@ -18,6 +19,7 @@ use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Email;
 use Laminas\Form\Element\Password;
+use Laminas\Form\Element\Radio;
 use Laminas\Form\Element\Select;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Text;
@@ -68,6 +70,11 @@ return [
             'formCheckbox' => FormCheckbox::class,
             'FormCheckbox' => FormCheckbox::class,
             'twFormCheckbox' => FormCheckbox::class,
+            'formradio' => FormRadio::class,
+            'form_radio' => FormRadio::class,
+            'formRadio' => FormRadio::class,
+            'FormRadio' => FormRadio::class,
+            'twFormRadio' => FormRadio::class,
         ],
         'factories' => [
             FormButton::class => InvokableFactory::class,
@@ -78,6 +85,7 @@ return [
             FormSelect::class => InvokableFactory::class,
             FormInput::class => InvokableFactory::class,
             FormCheckbox::class => InvokableFactory::class,
+            FormRadio::class => InvokableFactory::class,
             AlpineFormBindings::class => InvokableFactory::class,
         ],
     ],
@@ -107,6 +115,7 @@ return [
                 Checkbox::class,
                 Toggle::class,
                 Textarea::class,
+                Radio::class,
             ],
             'form_themes' => [
                 'default' => [
@@ -117,6 +126,8 @@ return [
                     Form::ELEMENT_CHECKBOX_CLASS => 'default-form-checkbox',
                     Form::ELEMENT_TOGGLE_CLASS => 'default-form-toggle',
                     Form::ELEMENT_TEXTAREA_CLASS => 'default-form-textarea',
+                    Form::ELEMENT_RADIO_OPTION_CLASS => 'default-radio-option',
+                    Form::ELEMENT_RADIO_OPTION_LABEL_CLASS => 'default-radio-label',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
                         'default' => 'default-form-button',

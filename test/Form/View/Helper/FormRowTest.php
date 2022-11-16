@@ -274,4 +274,53 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('comment'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_textarea_row_help_block.txt', $markup);
     }
+
+    public function testRendersRadioButtons()
+    {
+        $this->form->add([
+            'name' => 'sso_type',
+            'type' => Element\Radio::class,
+            'options' => [
+                'label' => 'Type',
+                'help-block' => 'What kind of SSO would you like?',
+                'value_options' => [
+                    'none' => 'Disabled',
+                    'other' => 'Foo',
+                ],
+                Form::OPTION_RADIO_LEGEND => 'Please select an option',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('sso_type'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/radio_row_help_block.txt', $markup);
+    }
+
+    public function testRendersRadioButtonsWithCustomLabelClasses()
+    {
+        $this->form->add([
+            'name' => 'sso_type',
+            'type' => Element\Radio::class,
+            'attributes' => [
+                'class' => 'hotsauce', // this overwrites the radio-option class
+            ],
+            'options' => [
+                'label' => 'Type',
+                'label_attributes' => [
+                    'class' => 'milk',
+                ],
+                'help-block' => 'What kind of SSO would you like?',
+                'option_label_attributes' => [
+                    'class' => 'bbq-chimken', // this overwrites the radio option-label class
+                ],
+                'value_options' => [
+                    'none' => 'Disabled',
+                    'other' => 'Foo',
+                ],
+                Form::OPTION_RADIO_LEGEND => 'Please select an option',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('sso_type'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/radio_row_help_block_custom_lc.txt', $markup);
+    }
 }
