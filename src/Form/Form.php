@@ -28,6 +28,7 @@ class Form extends \Laminas\Form\Form
     public const ELEMENT_TEXTAREA_CLASS = 'elementTextAreaClass';
     public const ELEMENT_RADIO_OPTION_CLASS = 'elementRadioOption';
     public const ELEMENT_RADIO_OPTION_LABEL_CLASS = 'elementRadioOptionLabelClass';
+    public const ELEMENT_RADIO_GROUP_CLASS = 'elementRadioGroupClass';
     public const ELEMENT_CLASS = 'elementClass';
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
@@ -124,9 +125,9 @@ class Form extends \Laminas\Form\Form
             } elseif ($elementOrFieldset instanceof Radio) {
                 $class = $this->tailwindThemeData[self::ELEMENT_RADIO_OPTION_CLASS];
                 $options = $elementOrFieldset->getOptions();
-                if (empty($options['option_label_attributes']['class'])) {
-                    $options = $elementOrFieldset->getOptions();
-                    $options['option_label_attributes']['class'] = $this->tailwindThemeData[self::ELEMENT_RADIO_OPTION_LABEL_CLASS];
+
+                if (empty($options[self::ELEMENT_RADIO_OPTION_LABEL_CLASS])) {
+                    $options[self::ELEMENT_RADIO_OPTION_LABEL_CLASS] = $this->tailwindThemeData[self::ELEMENT_RADIO_OPTION_LABEL_CLASS];
                     $elementOrFieldset->setOptions($options);
                 }
             } elseif ($elementOrFieldset instanceof Checkbox) {

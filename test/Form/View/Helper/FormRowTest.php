@@ -309,13 +309,12 @@ class FormRowTest extends TestCase
                     'class' => 'milk',
                 ],
                 'help-block' => 'What kind of SSO would you like?',
-                'option_label_attributes' => [
-                    'class' => 'bbq-chimken', // this overwrites the radio option-label class
-                ],
                 'value_options' => [
                     'none' => 'Disabled',
                     'other' => 'Foo',
                 ],
+                Form::ELEMENT_RADIO_OPTION_LABEL_CLASS => 'bbq-chimken',
+                Form::ELEMENT_RADIO_GROUP_CLASS => 'default-radio-group',
                 Form::OPTION_RADIO_LEGEND => 'Please select an option',
             ],
         ]);

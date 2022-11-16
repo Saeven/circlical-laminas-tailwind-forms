@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Form;
 use InvalidArgumentException;
 use Laminas\Form\Element\MultiCheckbox as MultiCheckboxElement;
 use Laminas\Form\ElementInterface;
@@ -76,7 +77,7 @@ class FormRadio extends LaminasFormRadio
         $combinedMarkup = [];
         $count = 0;
         $elementOptions = $element->getOptions();
-        $optionLabelClass = $elementOptions['option_label_attributes']['class'] ?? 'label-class-not-set';
+        $optionLabelClass = $elementOptions[Form::ELEMENT_RADIO_OPTION_LABEL_CLASS] ?? 'label-class-not-set';
 
         foreach ($options as $key => $optionSpec) {
             $count++;
@@ -150,7 +151,12 @@ class FormRadio extends LaminasFormRadio
             }
 
             $label = $labelHelper->openTag($labelAttributes) . $label . $labelClose;
-            $markup = sprintf("            <div class=\"flex items-center\">\n                %s\n                %s\n            </div>\n", $input, $label);
+            $markup = sprintf(
+                "            <div class=\"%s\">\n                %s\n                %s\n            </div>\n",
+                $elementOptions[Form::ELEMENT_RADIO_GROUP_CLASS] ?? 'flex items-center',
+                $input,
+                $label
+            );
             $combinedMarkup[] = $markup;
         }
 
