@@ -87,6 +87,14 @@ To get you started, here some that I use in a project that leverages this librar
   .default-form-toggle.active .toggle-control {
       @apply translate-x-5 pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out;
   }
+  
+  .default-radio-option {
+      @apply h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500;
+  }
+   
+  .default-radio-label {
+      @apply ml-3 block text-sm font-medium text-gray-700;
+  }
 ```
 
 #### Implementation Notes

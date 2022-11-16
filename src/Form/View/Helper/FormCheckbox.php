@@ -8,10 +8,11 @@ use DomainException;
 use InvalidArgumentException;
 use Laminas\Form\Element\Checkbox as CheckboxElement;
 use Laminas\Form\ElementInterface;
+use Laminas\Form\View\Helper\FormCheckbox as LaminasFormCheckbox;
 
 use function sprintf;
 
-class FormCheckbox extends \Laminas\Form\View\Helper\FormCheckbox
+class FormCheckbox extends LaminasFormCheckbox
 {
     public function render(ElementInterface $element): string
     {

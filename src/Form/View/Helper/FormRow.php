@@ -9,6 +9,7 @@ use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Radio;
 use Laminas\Form\ElementInterface;
 use Laminas\Stdlib\ArrayUtils;
 
@@ -72,6 +73,19 @@ CHECKBOX_ELEMENT_TEMPLATE;
 </div>
 TOGGLE_ELEMENT_TEMPLATE;
 
+    protected static string $radioElementTemplate = <<<RADIO_ELEMENT_TEMPLATE
+<div>
+    {{LABEL}}
+    {{HELP-BLOCK}}
+    <fieldset class="mt-4">
+        <legend class="sr-only">{{HELP_BLOCK_TEXT}}</legend>
+        <div class="space-y-4">
+{{ELEMENT}}        
+        </div>
+    </fieldset>
+</div>
+RADIO_ELEMENT_TEMPLATE;
+
     /**
      * @inheritDoc
      */
@@ -115,6 +129,19 @@ TOGGLE_ELEMENT_TEMPLATE;
             if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
                 $helpBlock = sprintf(
                     '<span id="%s-description" class="%s">%s</span>',
+                    $element->getName(),
+                    $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
+                    $helpBlockText
+                );
+            }
+        } elseif ($element instanceof Radio) {
+            // Note that radio extends checkbox
+            $selectedTemplate = static::$radioElementTemplate;
+            $label = $this->renderLabel($element);
+            $extraTemplateParameters['{{HELP_BLOCK_TEXT}}'] = $element->getOption(Form::OPTION_RADIO_LEGEND) ?? '';
+            if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
+                $helpBlock = sprintf(
+                    '<p id="%s-description" class="%s">%s</p>',
                     $element->getName(),
                     $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
                     $helpBlockText
