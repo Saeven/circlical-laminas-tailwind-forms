@@ -4,11 +4,11 @@
     <fieldset class="mt-4">
         <legend class="sr-only">Please select an option</legend>
         <div class="space-y-4">
-            <div class="flex items-center">
+            <div class="default-radio-group">
                 <input type="radio" name="sso_type" class="hotsauce" value="none" id="sso_type-opt-none">
                 <label class="bbq-chimken" for="sso_type-opt-none">Disabled</label>
             </div>
-            <div class="flex items-center">
+            <div class="default-radio-group">
                 <input type="radio" name="sso_type" class="hotsauce" value="other" id="sso_type-opt-other">
                 <label class="bbq-chimken" for="sso_type-opt-other">Foo</label>
             </div>
