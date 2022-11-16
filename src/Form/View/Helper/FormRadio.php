@@ -153,7 +153,7 @@ class FormRadio extends LaminasFormRadio
             $label = $labelHelper->openTag($labelAttributes) . $label . $labelClose;
             $markup = sprintf(
                 "            <div class=\"%s\">\n                %s\n                %s\n            </div>\n",
-                $elementOptions[Form::ELEMENT_RADIO_GROUP_CLASS] ?? 'flex items-center',
+                $elementOptions[Form::ELEMENT_RADIO_GROUP_CLASS] ?? 'default-radio-group',
                 $input,
                 $label
             );

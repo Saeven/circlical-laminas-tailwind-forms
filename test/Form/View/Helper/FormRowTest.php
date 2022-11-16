@@ -314,7 +314,7 @@ class FormRowTest extends TestCase
                     'other' => 'Foo',
                 ],
                 Form::ELEMENT_RADIO_OPTION_LABEL_CLASS => 'bbq-chimken',
-                Form::ELEMENT_RADIO_GROUP_CLASS => 'default-radio-group',
+                Form::ELEMENT_RADIO_GROUP_CLASS => 'default-radio-planet',
                 Form::OPTION_RADIO_LEGEND => 'Please select an option',
             ],
         ]);
