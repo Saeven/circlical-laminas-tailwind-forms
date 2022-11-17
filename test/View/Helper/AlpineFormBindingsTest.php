@@ -2,9 +2,11 @@
 
 namespace Circlical\TailwindFormsTest\View\Helper;
 
+use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\View\Helper\AlpineFormBindings;
 use Circlical\TailwindFormsTest\Bootstrap;
+use Laminas\Filter\ToInt;
 use Laminas\InputFilter\InputFilter;
 use Laminas\View\Renderer\PhpRenderer;
 use Laminas\Form\Element;
@@ -98,6 +100,27 @@ class AlpineFormBindingsTest extends TestCase
             'type' => Element\Submit::class,
             'options' => [
                 'value' => 'submit',
+            ],
+        ]);
+
+        $this->form->add([
+            'name' => 'intvalue',
+            'type' => Toggle::class,
+            'options' => [
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+            ],
+            'attributes' => [
+                'value' => '1'
+            ]
+        ]);
+
+        $inputFilter = $this->form->getInputFilter();
+        $inputFilter->add([
+            'name' => 'intvalue',
+            'required' => false,
+            'filters' => [
+                ['name' => ToInt::class],
             ],
         ]);
 
