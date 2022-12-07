@@ -2,6 +2,7 @@
     <div class="flex items-center">
         <button
             name="disable_email_notifications"
+            id="disable_email_notifications"
             x-bind:class="{'error': errors['disable_email_notifications'].length > 0, 'active': data['disable_email_notifications']}"
             x-model.number="data['disable_email_notifications']" x-on:click="data['disable_email_notifications'] = !data['disable_email_notifications'] | 0"
             type="button" class="default-form-toggle" role="switch" :aria-checked="data['disable_email_notifications']">
