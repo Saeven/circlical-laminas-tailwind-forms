@@ -59,6 +59,7 @@ CHECKBOX_ELEMENT_TEMPLATE;
 <div>
     <div class="flex items-center">
         <button
+            name="{{NAME}}"
             x-bind:class="{{BIND}}"
             x-model.number="{{MODEL}}" x-on:click="{{MODEL}} = !{{MODEL}} | 0"
             type="button" class="{{TOGGLE_CLASS}}" role="switch" :aria-checked="{{MODEL}}">
@@ -124,6 +125,7 @@ RADIO_ELEMENT_TEMPLATE;
             $label = $this->renderLabel($element);
             $element->setAttribute('aria-describedby', $element->getName() . '-description');
             $extraTemplateParameters['{{TOGGLE_CLASS}}'] = $element->getAttribute('class');
+            $extraTemplateParameters['{{NAME}}'] = $element->getName();
             $extraTemplateParameters['{{BIND}}'] = $element->getAttribute('x-bind:class');
             $extraTemplateParameters['{{MODEL}}'] = $element->getAttribute('x-model');
             if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
