@@ -1,7 +1,7 @@
 <div>
     <label class="default-form-label" for="sso_type">Type</label>
     <p id="sso_type-description" class="default-form-help-block">What kind of SSO would you like?</p>
-    <fieldset class="mt-4">
+    <fieldset class="default-form-fieldset">
         <legend class="sr-only">Please select an option</legend>
         <div class="space-y-4">
             <div class="default-radio-group">

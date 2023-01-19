@@ -79,7 +79,7 @@ TOGGLE_ELEMENT_TEMPLATE;
 <div>
     {{LABEL}}
     {{HELP-BLOCK}}
-    <fieldset class="mt-4">
+    <fieldset class="default-form-fieldset">
         <legend class="sr-only">{{HELP_BLOCK_TEXT}}</legend>
         <div class="space-y-4">
 {{ELEMENT}}        
