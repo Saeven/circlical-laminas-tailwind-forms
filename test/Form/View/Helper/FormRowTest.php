@@ -322,4 +322,44 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('sso_type'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/radio_row_help_block_custom_lc.txt', $markup);
     }
+
+    public function testSupportsNamedDataModels()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->setDataModelName('other');
+        $this->form->add([
+            'name' => 'email',
+            'type' => Element\Text::class,
+            'attributes' => [
+                'id' => 'email',
+            ],
+            'options' => [
+                'label' => "Email",
+                'help-block' => "This is a help block.",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('email'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_named_model.txt', $markup);
+    }
+
+    public function testSupportsNamedErrorModels()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->setErrorModelName('mistakes');
+        $this->form->add([
+            'name' => 'email',
+            'type' => Element\Text::class,
+            'attributes' => [
+                'id' => 'email',
+            ],
+            'options' => [
+                'label' => "Email",
+                'help-block' => "This is a help block.",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('email'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_named_error_model.txt', $markup);
+    }
 }

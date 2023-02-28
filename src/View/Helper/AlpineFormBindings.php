@@ -45,6 +45,6 @@ class AlpineFormBindings extends AbstractHelper
             }
         }
 
-        return rtrim(substr(json_encode(['data' => $data, 'errors' => $errors], JSON_THROW_ON_ERROR), 1, -1)) . ',';
+        return rtrim(substr(json_encode([$form->getDataModelName() => $data, $form->getErrorModelName() => $errors], JSON_THROW_ON_ERROR), 1, -1)) . ',';
     }
 }
