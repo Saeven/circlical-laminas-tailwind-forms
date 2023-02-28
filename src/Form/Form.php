@@ -39,9 +39,17 @@ class Form extends \Laminas\Form\Form
     public const OPTION_HELP_BLOCK = 'help-block';
     public const OPTION_RADIO_LEGEND = 'radio-legend';
 
+    public const OPTION_DATA_MODEL_NAME = 'data-model-name';
+
+    public const OPTION_ERROR_MODEL_NAME = 'error-model-name';
+
     private ?array $tailwindThemeData;
 
     private bool $generateAlpineMarkup = false;
+
+    private string $dataModelName = 'data';
+
+    private string $errorModelName = 'errors';
 
     public function setThemeConfiguration(array $tailwindThemeData): void
     {
@@ -51,6 +59,26 @@ class Form extends \Laminas\Form\Form
     public function setGenerateAlpineMarkup(bool $generateAlpineMarkup): void
     {
         $this->generateAlpineMarkup = $generateAlpineMarkup;
+    }
+
+    public function getDataModelName(): string
+    {
+        return $this->dataModelName;
+    }
+
+    public function getErrorModelName(): string
+    {
+        return $this->errorModelName;
+    }
+
+    public function setDataModelName(string $dataModelName): void
+    {
+        $this->dataModelName = $dataModelName;
+    }
+
+    public function setErrorModelName(string $errorModelName): void
+    {
+        $this->errorModelName = $errorModelName;
     }
 
     /**
@@ -86,7 +114,9 @@ class Form extends \Laminas\Form\Form
                 'class' => $labelClass,
             ])
             ->setOption(self::ELEMENT_ERROR_CLASS, $this->tailwindThemeData[self::ELEMENT_ERROR_CLASS] ?? '')
-            ->setOption(self::ELEMENT_HELP_BLOCK_CLASS, $this->tailwindThemeData[self::ELEMENT_HELP_BLOCK_CLASS] ?? '');
+            ->setOption(self::ELEMENT_HELP_BLOCK_CLASS, $this->tailwindThemeData[self::ELEMENT_HELP_BLOCK_CLASS] ?? '')
+            ->setOption(self::OPTION_DATA_MODEL_NAME, $this->dataModelName)
+            ->setOption(self::OPTION_ERROR_MODEL_NAME, $this->errorModelName);
 
         //
         // 1. Are we in "Alpine" mode? Toggle requires Alpine.
@@ -95,7 +125,7 @@ class Form extends \Laminas\Form\Form
         $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup || $elementRequiresAlpine);
         if ($this->generateAlpineMarkup || $elementOrFieldset instanceof Toggle) {
             if (!($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit)) {
-                $modelValue = sprintf("data['%s']", $elementOrFieldset->getName());
+                $modelValue = sprintf("%s['%s']", $this->dataModelName, $elementOrFieldset->getName());
                 $elementOrFieldset->setAttribute('x-model', $modelValue);
 
                 // if there is no class binding, and auto-error binding has not been disabled, enable it
@@ -103,10 +133,10 @@ class Form extends \Laminas\Form\Form
                     if ($elementOrFieldset instanceof Toggle) {
                         $elementOrFieldset->setAttribute(
                             'x-bind:class',
-                            sprintf("{'error': errors['%s'].length > 0, 'active': %s}", $elementOrFieldset->getName(), $modelValue)
+                            sprintf("{'error': %s['%s'].length > 0, 'active': %s}", $this->errorModelName, $elementOrFieldset->getName(), $modelValue)
                         );
                     } else {
-                        $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': errors['%s'].length > 0}", $elementOrFieldset->getName()));
+                        $elementOrFieldset->setAttribute('x-bind:class', sprintf("{'error': %s['%s'].length > 0}", $this->errorModelName, $elementOrFieldset->getName()));
                     }
                 }
             }

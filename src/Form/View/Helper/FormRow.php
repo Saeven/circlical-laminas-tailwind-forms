@@ -21,7 +21,7 @@ class FormRow extends \Laminas\Form\View\Helper\FormRow
 {
     protected static string $alpineErrorTemplate = <<<ALPINE_ERROR_TEMPLATE
 <div id="{{NAME}}-errors">
-    <template x-for="(error) in errors['{{NAME}}']">
+    <template x-for="(error) in {{ERROR_MODEL}}['{{NAME}}']">
         <p class="{{ERROR-CLASS}}" x-text="error"></p>
     </template>
 </div>
@@ -110,6 +110,7 @@ RADIO_ELEMENT_TEMPLATE;
                 $elementErrors = strtr(static::$alpineErrorTemplate, [
                     '{{NAME}}' => $element->getName(),
                     '{{ERROR-CLASS}}' => $element->getOption(Form::ELEMENT_ERROR_CLASS) ?? '',
+                    '{{ERROR_MODEL}}' => $element->getOption(Form::OPTION_ERROR_MODEL_NAME)
                 ]);
             }
         } elseif ($this->renderErrors) {
