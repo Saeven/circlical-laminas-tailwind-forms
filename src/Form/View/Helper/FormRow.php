@@ -110,7 +110,7 @@ RADIO_ELEMENT_TEMPLATE;
                 $elementErrors = strtr(static::$alpineErrorTemplate, [
                     '{{NAME}}' => $element->getName(),
                     '{{ERROR-CLASS}}' => $element->getOption(Form::ELEMENT_ERROR_CLASS) ?? '',
-                    '{{ERROR_MODEL}}' => $element->getOption(Form::OPTION_ERROR_MODEL_NAME)
+                    '{{ERROR_MODEL}}' => $element->getOption(Form::OPTION_ERROR_MODEL_NAME),
                 ]);
             }
         } elseif ($this->renderErrors) {
