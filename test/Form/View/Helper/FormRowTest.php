@@ -376,7 +376,7 @@ class FormRowTest extends TestCase
             'options' => [
                 'label' => "Email",
                 'help-block' => "This is a help block.",
-                Form::OPTION_ELEMENT_X_MODEL_NAME => 'data.chicken',
+                Form::OPTION_ELEMENT_X_MODEL_NAME => 'data.chicken.foot',
             ],
         ]);
 
