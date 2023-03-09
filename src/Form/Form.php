@@ -43,6 +43,8 @@ class Form extends \Laminas\Form\Form
 
     public const OPTION_ERROR_MODEL_NAME = 'error-model-name';
 
+    public const OPTION_ELEMENT_X_MODEL_NAME = 'element-x-model-name';
+
     private ?array $tailwindThemeData;
 
     private bool $generateAlpineMarkup = false;
@@ -125,7 +127,7 @@ class Form extends \Laminas\Form\Form
         $elementOrFieldset->setOption(self::OPTION_ADD_ALPINEJS_MARKUP, $this->generateAlpineMarkup || $elementRequiresAlpine);
         if ($this->generateAlpineMarkup || $elementOrFieldset instanceof Toggle) {
             if (!($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit)) {
-                $modelValue = sprintf("%s['%s']", $this->dataModelName, $elementOrFieldset->getName());
+                $modelValue = sprintf("%s['%s']", $this->dataModelName, self::getXModelName($elementOrFieldset));
                 $elementOrFieldset->setAttribute('x-model', $modelValue);
 
                 // if there is no class binding, and auto-error binding has not been disabled, enable it
@@ -174,5 +176,15 @@ class Form extends \Laminas\Form\Form
         }
 
         return $this;
+    }
+
+    public static function getXModelName(ElementInterface $element): string
+    {
+        $name = $element->getOption(self::OPTION_ELEMENT_X_MODEL_NAME);
+        if (is_string($name)) {
+            return $name;
+        }
+
+        return $element->getName();
     }
 }
