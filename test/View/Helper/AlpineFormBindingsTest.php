@@ -111,8 +111,8 @@ class AlpineFormBindingsTest extends TestCase
                 'unchecked_value' => '0',
             ],
             'attributes' => [
-                'value' => '1'
-            ]
+                'value' => '1',
+            ],
         ]);
 
         $inputFilter = $this->form->getInputFilter();

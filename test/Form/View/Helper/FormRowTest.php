@@ -362,4 +362,25 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('email'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_named_error_model.txt', $markup);
     }
+
+    public function testSupportsModelNameOverrides()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->setErrorModelName('mistakes');
+        $this->form->add([
+            'name' => 'email',
+            'type' => Element\Text::class,
+            'attributes' => [
+                'id' => 'email',
+            ],
+            'options' => [
+                'label' => "Email",
+                'help-block' => "This is a help block.",
+                Form::OPTION_ELEMENT_X_MODEL_NAME => 'data.chicken',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('email'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_model_override.txt', $markup);
+    }
 }
