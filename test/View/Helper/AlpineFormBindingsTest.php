@@ -128,5 +128,21 @@ class AlpineFormBindingsTest extends TestCase
         $markup = $this->helper->__invoke($this->form);
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_form_binding_without_buttons.txt', $markup);
     }
+
+    public function testCanRenderBindingsWithoutData()
+    {
+        $element = new Element\Text('email');
+        $element->setAttributes([
+            'type' => 'text',
+            'id' => 'email',
+            'placeholder' => 'you@example.com',
+        ]);
+        $element->setLabel('Email');
+        $this->form->add($element);
+
+        $markup = $this->helper->__invoke($this->form, false);
+
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_form_binding_no_data.txt', $markup);
+    }
 }
 

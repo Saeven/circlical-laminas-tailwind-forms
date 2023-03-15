@@ -21,7 +21,7 @@ class AlpineFormBindings extends AbstractHelper
     /**
      * @inheritDoc
      */
-    public function __invoke(Form $form)
+    public function __invoke(Form $form, bool $printDataModel = true, bool $printErrorModel = true)
     {
         $errors = [];
         $data = [];
@@ -45,6 +45,16 @@ class AlpineFormBindings extends AbstractHelper
             }
         }
 
-        return rtrim(substr(json_encode([$form->getDataModelName() => $data, $form->getErrorModelName() => $errors], JSON_THROW_ON_ERROR), 1, -1)) . ',';
+        $model = [];
+
+        if ($printDataModel) {
+            $model[$form->getDataModelName()] = $data;
+        }
+
+        if ($printErrorModel) {
+            $model[$form->getErrorModelName()] = $errors;
+        }
+
+        return rtrim(substr(json_encode($model, JSON_THROW_ON_ERROR), 1, -1)) . ',';
     }
 }
