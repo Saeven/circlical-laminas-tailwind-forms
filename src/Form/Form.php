@@ -130,7 +130,10 @@ class Form extends \Laminas\Form\Form
         if ($this->generateAlpineMarkup || $elementOrFieldset instanceof Toggle) {
             if (!($elementOrFieldset instanceof Button || $elementOrFieldset instanceof Submit)) {
                 $modelValue = self::getXModelName($elementOrFieldset);
-                $elementOrFieldset->setAttribute('x-model', $modelValue);
+
+                if (!$elementOrFieldset instanceof File) {
+                    $elementOrFieldset->setAttribute('x-model', $modelValue);
+                }
 
                 // if there is no class binding, and auto-error binding has not been disabled, enable it
                 if (!$elementOrFieldset->getAttribute('x-bind:class') && $elementOrFieldset->getOption(self::OPTION_BIND_ERROR_CLASS) !== false) {
