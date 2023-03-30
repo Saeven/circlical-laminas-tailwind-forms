@@ -9,6 +9,7 @@ use Circlical\TailwindForms\Form\View\Helper\FormButton;
 use Circlical\TailwindForms\Form\View\Helper\FormCheckbox;
 use Circlical\TailwindForms\Form\View\Helper\FormElement;
 use Circlical\TailwindForms\Form\View\Helper\FormElementErrors;
+use Circlical\TailwindForms\Form\View\Helper\FormFile;
 use Circlical\TailwindForms\Form\View\Helper\FormInput;
 use Circlical\TailwindForms\Form\View\Helper\FormRadio;
 use Circlical\TailwindForms\Form\View\Helper\FormRow;
@@ -18,6 +19,7 @@ use Circlical\TailwindForms\View\Helper\AlpineFormBindings;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Email;
+use Laminas\Form\Element\File;
 use Laminas\Form\Element\Password;
 use Laminas\Form\Element\Radio;
 use Laminas\Form\Element\Select;
@@ -75,6 +77,9 @@ return [
             'formRadio' => FormRadio::class,
             'FormRadio' => FormRadio::class,
             'twFormRadio' => FormRadio::class,
+            'form_file' => FormFile::class,
+            'formFile' => FormFile::class,
+            'twFormFile' => FormFile::class,
         ],
         'factories' => [
             FormButton::class => InvokableFactory::class,
@@ -116,6 +121,7 @@ return [
                 Toggle::class,
                 Textarea::class,
                 Radio::class,
+                File::class
             ],
             'form_themes' => [
                 'default' => [
@@ -128,6 +134,7 @@ return [
                     Form::ELEMENT_TEXTAREA_CLASS => 'default-form-textarea',
                     Form::ELEMENT_RADIO_OPTION_CLASS => 'default-radio-option',
                     Form::ELEMENT_RADIO_OPTION_LABEL_CLASS => 'default-radio-label',
+                    Form::ELEMENT_FILE_CLASS => 'default-file-element',
                     Form::BUTTON_THEMES => [
                         'primary' => 'default-form-button-primary',
                         'default' => 'default-form-button',
