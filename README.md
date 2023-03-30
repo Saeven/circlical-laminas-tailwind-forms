@@ -95,6 +95,10 @@ To get you started, here some that I use in a project that leverages this librar
   .default-radio-label {
       @apply ml-3 block text-sm font-medium text-gray-700;
   }
+  
+  .default-file-element {
+      @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-violet-100;
+  }
 ```
 
 #### Implementation Notes

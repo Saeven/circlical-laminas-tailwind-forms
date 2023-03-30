@@ -8,6 +8,7 @@ use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\ThemeManager;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\File;
 use Laminas\Form\Element\Radio;
 use Laminas\Form\Element\Submit;
 use Laminas\Form\Element\Textarea;
@@ -29,6 +30,7 @@ class Form extends \Laminas\Form\Form
     public const ELEMENT_RADIO_OPTION_CLASS = 'elementRadioOption';
     public const ELEMENT_RADIO_OPTION_LABEL_CLASS = 'elementRadioOptionLabelClass';
     public const ELEMENT_RADIO_GROUP_CLASS = 'elementRadioGroupClass';
+    public const ELEMENT_FILE_CLASS = 'elementFileInputClass';
     public const ELEMENT_CLASS = 'elementClass';
     public const BUTTON_THEMES = 'buttonThemes';
     public const BUTTON_TYPE = 'buttonType';
@@ -166,6 +168,8 @@ class Form extends \Laminas\Form\Form
                 $class = $this->tailwindThemeData[self::ELEMENT_CHECKBOX_CLASS];
             } elseif ($elementOrFieldset instanceof Textarea) {
                 $class = $this->tailwindThemeData[self::ELEMENT_TEXTAREA_CLASS];
+            } elseif ($elementOrFieldset instanceof File) {
+                $class = $this->tailwindThemeData[self::ELEMENT_FILE_CLASS];
             }
 
             if ($addedClasses = $elementOrFieldset->getOption(self::ADD_CLASSES)) {

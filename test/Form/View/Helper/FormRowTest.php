@@ -383,4 +383,20 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('email'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_model_override.txt', $markup);
     }
+
+    public function testSupportsFileControls()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'subtitles',
+            'type' => Element\File::class,
+            'options' => [
+                'label' => "Subtitles",
+                'help-block' => "Please upload your .vtt subtitle file.",
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('subtitles'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_file_input.txt', $markup);
+    }
 }
