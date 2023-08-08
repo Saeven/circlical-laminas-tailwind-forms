@@ -255,6 +255,22 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/toggle_row_help_block.txt', $markup);
     }
 
+    public function testRendersTogglesWithAttributes()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'disable_email_notifications',
+            'type' => Toggle::class,
+            'attributes' => [
+                'id' => 'disable_email_notifications',
+                'x-bind:disabled' => 'model.object',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('disable_email_notifications'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/toggle_attribute_row_help_block.txt', $markup);
+    }
+
     public function testRendersTextArea()
     {
         $this->form->setGenerateAlpineMarkup(true);
