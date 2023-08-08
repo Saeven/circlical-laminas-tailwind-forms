@@ -1,0 +1,19 @@
+<div>
+    <div class="flex items-center">
+        <button
+            name="disable_email_notifications"
+            id="disable_email_notifications"
+            x-bind:disabled="model.object" x-bind:class="{'error': errors['disable_email_notifications'].length > 0, 'active': data['disable_email_notifications']}"
+            x-model.number="data['disable_email_notifications']" x-on:click="data['disable_email_notifications'] = !data['disable_email_notifications'] | 0"
+            type="button" class="default-form-toggle" role="switch" :aria-checked="data['disable_email_notifications']">
+            <span aria-hidden="true" class="toggle-control"></span>
+        </button>
+        <div class="ml-3">
+        </div>
+    </div>
+    <div id="disable_email_notifications-errors">
+    <template x-for="(error) in errors['disable_email_notifications']">
+        <p class="default-form-error" x-text="error"></p>
+    </template>
+</div>
+</div>

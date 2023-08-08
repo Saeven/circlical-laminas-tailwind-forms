@@ -7,6 +7,7 @@ namespace Circlical\TailwindForms\Form\View\Helper;
 use Circlical\TailwindForms\Form\Element\Toggle;
 use Circlical\TailwindForms\Form\Form;
 use Circlical\TailwindForms\ThemeManager;
+use Laminas\Escaper\Exception\RuntimeException as EscaperException;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
 use Laminas\Form\Element\Radio;
@@ -61,7 +62,7 @@ CHECKBOX_ELEMENT_TEMPLATE;
         <button
             name="{{NAME}}"
             id="{{ID}}"
-            x-bind:class="{{BIND}}"
+            {{BIND}}
             x-model.number="{{MODEL}}" x-on:click="{{MODEL}} = !{{MODEL}} | 0"
             type="button" class="{{TOGGLE_CLASS}}" role="switch" :aria-checked="{{MODEL}}">
             <span aria-hidden="true" class="toggle-control"></span>
@@ -129,7 +130,6 @@ RADIO_ELEMENT_TEMPLATE;
             $extraTemplateParameters['{{TOGGLE_CLASS}}'] = $element->getAttribute('class');
             $extraTemplateParameters['{{NAME}}'] = $element->getName();
             $extraTemplateParameters['{{ID}}'] = $element->getAttribute('id') ?? $element->getName();
-            $extraTemplateParameters['{{BIND}}'] = $element->getAttribute('x-bind:class');
             $extraTemplateParameters['{{MODEL}}'] = $element->getAttribute('x-model');
             if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
                 $helpBlock = sprintf(
@@ -186,6 +186,7 @@ RADIO_ELEMENT_TEMPLATE;
                 [
                     '{{LABEL}}' => $label,
                     '{{ELEMENT}}' => $elementHelper->render($element),
+                    '{{BIND}}' => $this->createBindAttributesString($element->getAttributes()),
                     '{{HELP-BLOCK}}' => $helpBlock,
                     '{{ERRORS}}' => $elementErrors,
                 ],
@@ -211,5 +212,36 @@ RADIO_ELEMENT_TEMPLATE;
         }
 
         return $label;
+    }
+
+    public function createBindAttributesString(array $attributes): string
+    {
+        $bindAttributes = [];
+        foreach ($attributes as $attribute => $value) {
+            if (stripos($attribute, 'x-bind') === 0) {
+                $bindAttributes[$attribute] = $value;
+            }
+        }
+
+        $attributes = $this->prepareAttributes($bindAttributes);
+        $escape = $this->getEscapeHtmlHelper();
+        $escapeAttr = $this->getEscapeHtmlAttrHelper();
+        $doctypeHelper = $this->getDoctypeHelper();
+        $strings = [];
+
+        foreach ($attributes as $key => $value) {
+            $key = strtolower($key);
+
+            // @todo Escape event attributes like AbstractHtmlElement view helper does in htmlAttribs ??
+            try {
+                $escapedAttribute = $escapeAttr($value);
+                $strings[] = sprintf('%s="%s"', $escape($key), $value);
+            } catch (EscaperException $x) {
+                // If an escaper exception happens, escape only the key, and use a blank value.
+                $strings[] = sprintf('%s=""', $escape($key));
+            }
+        }
+
+        return implode(" ", $strings);
     }
 }
