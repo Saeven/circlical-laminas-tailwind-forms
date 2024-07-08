@@ -48,8 +48,9 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
 
         if ($element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME)) {
             $rendered = sprintf(
-                "<select %s>\n%s\n</select>",
+                "<select %s>%s\n%s\n</select>",
                 $this->createAttributesString($attributes),
+                $this->getEmptyLabel($element),
                 sprintf(
                     '<template x-for="(value, item) in %s">'
                     . '<option x-text="value" :value="item" :selected="item == %s"></option>'
@@ -76,5 +77,15 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
         }
 
         return $rendered;
+    }
+
+    private function getEmptyLabel(SelectElement $element): string
+    {
+        $emptyOption = $element->getEmptyOption();
+        if ($emptyOption && is_string($emptyOption)) {
+            return sprintf('<option x-text="%s"></option>', $emptyOption);
+        }
+
+        return '';
     }
 }
