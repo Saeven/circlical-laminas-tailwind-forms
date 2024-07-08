@@ -218,6 +218,26 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/select_row.txt', $markup);
     }
 
+    public function testRendersSelectFieldsWithTemplateOptions()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'location',
+            'type' => Element\Select::class,
+            'options' => [
+                'label' => 'Location',
+                Form::OPTION_ELEMENT_X_MODEL_NAME => 'id',
+                Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME => 'selectOptions',
+            ],
+            'attributes' => [
+                'id' => 'location',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('location'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/select_row_template_options.txt', $markup);
+    }
+
     public function testRendersCheckBoxes()
     {
         $this->form->add([
