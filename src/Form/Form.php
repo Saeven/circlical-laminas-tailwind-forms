@@ -47,6 +47,8 @@ class Form extends \Laminas\Form\Form
 
     public const OPTION_ELEMENT_X_MODEL_NAME = 'element-x-model-name';
 
+    public const OPTION_ELEMENT_X_SELECT_MODEL_NAME = 'element-x-model-select';
+
     private ?array $tailwindThemeData;
 
     private bool $generateAlpineMarkup = false;

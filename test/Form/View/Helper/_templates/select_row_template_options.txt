@@ -1,0 +1,13 @@
+<div>
+    <label class="default-form-label" for="location">Location</label>
+    <div class="mt-1">
+        <select name="location" id="location" x-model="id" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;location&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-form-element">
+<template x-for="(value, item) in selectOptions"><option x-text="value" :value="item" :selected="item == id"></option></template>
+</select>
+    </div>
+    <div id="location-errors">
+    <template x-for="(error) in errors['location']">
+        <p class="default-form-error" x-text="error"></p>
+    </template>
+</div>
+</div>

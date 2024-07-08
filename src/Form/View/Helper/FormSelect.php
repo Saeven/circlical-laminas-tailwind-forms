@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Circlical\TailwindForms\Form\View\Helper;
 
+use Circlical\TailwindForms\Form\Form;
 use Laminas\Form\Element\Select as SelectElement;
 use Laminas\Form\ElementInterface;
 
@@ -45,11 +46,25 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
         }
         $this->validTagAttributes = $this->validSelectAttributes;
 
-        $rendered = sprintf(
-            "<select %s>\n%s\n</select>",
-            $this->createAttributesString($attributes),
-            $this->renderOptions($options, $value)
-        );
+        if ($element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME)) {
+            $rendered = sprintf(
+                "<select %s>\n%s\n</select>",
+                $this->createAttributesString($attributes),
+                sprintf(
+                    '<template x-for="(value, item) in %s">'
+                    . '<option x-text="value" :value="item" :selected="item == %s"></option>'
+                    . '</template>',
+                    $element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME),
+                    $element->getOption(Form::OPTION_ELEMENT_X_MODEL_NAME)
+                )
+            );
+        } else {
+            $rendered = sprintf(
+                "<select %s>\n%s\n</select>",
+                $this->createAttributesString($attributes),
+                $this->renderOptions($options, $value)
+            );
+        }
 
         // Render hidden element
         $useHiddenElement = method_exists($element, 'useHiddenElement')
