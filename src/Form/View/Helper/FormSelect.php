@@ -9,6 +9,7 @@ use Laminas\Form\Element\Select as SelectElement;
 use Laminas\Form\ElementInterface;
 
 use function array_key_exists;
+use function is_string;
 use function method_exists;
 use function sprintf;
 
