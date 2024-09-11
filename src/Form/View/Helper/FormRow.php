@@ -14,8 +14,11 @@ use Laminas\Form\Element\Radio;
 use Laminas\Form\ElementInterface;
 use Laminas\Stdlib\ArrayUtils;
 
+use function implode;
 use function preg_replace;
 use function sprintf;
+use function stripos;
+use function strtolower;
 use function strtr;
 
 class FormRow extends \Laminas\Form\View\Helper\FormRow
@@ -86,6 +89,7 @@ TOGGLE_ELEMENT_TEMPLATE;
 {{ELEMENT}}        
         </div>
     </fieldset>
+    {{ERRORS}}
 </div>
 RADIO_ELEMENT_TEMPLATE;
 

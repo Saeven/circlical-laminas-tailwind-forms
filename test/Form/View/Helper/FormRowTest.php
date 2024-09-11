@@ -352,6 +352,27 @@ class FormRowTest extends TestCase
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/radio_row_help_block.txt', $markup);
     }
 
+    public function testRendersRadioAlpineButtons()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'sso_type',
+            'type' => Element\Radio::class,
+            'options' => [
+                'label' => 'Type',
+                'help-block' => 'What kind of SSO would you like?',
+                'value_options' => [
+                    'none' => 'Disabled',
+                    'other' => 'Foo',
+                ],
+                Form::OPTION_RADIO_LEGEND => 'Please select an option',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('sso_type'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_radio_row.txt', $markup);
+    }
+
     public function testRendersRadioButtonsWithCustomLabelClasses()
     {
         $this->form->add([

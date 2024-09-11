@@ -1,0 +1,22 @@
+<div>
+    <label class="default-form-label" for="sso_type">Type</label>
+    <p id="sso_type-description" class="default-form-help-block">What kind of SSO would you like?</p>
+    <fieldset class="default-form-fieldset">
+        <legend class="sr-only">Please select an option</legend>
+        <div class="space-y-4">
+            <div class="default-radio-group">
+                <input type="radio" name="sso_type" x-model="data&#x5B;&#x27;sso_type&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;sso_type&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-radio-option" value="none" id="sso_type-opt-none">
+                <label class="default-radio-label" for="sso_type-opt-none">Disabled</label>
+            </div>
+            <div class="default-radio-group">
+                <input type="radio" name="sso_type" x-model="data&#x5B;&#x27;sso_type&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;sso_type&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-radio-option" value="other" id="sso_type-opt-other">
+                <label class="default-radio-label" for="sso_type-opt-other">Foo</label>
+            </div>
+        </div>
+    </fieldset>
+    <div id="sso_type-errors">
+    <template x-for="(error) in errors['sso_type']">
+        <p class="default-form-error" x-text="error"></p>
+    </template>
+</div>
+</div>
