@@ -67,6 +67,11 @@ class Form extends \Laminas\Form\Form
         $this->generateAlpineMarkup = $generateAlpineMarkup;
     }
 
+    public function doesGenerateAlpineMarkup(): bool
+    {
+        return $this->generateAlpineMarkup;
+    }
+
     public function getDataModelName(): string
     {
         return $this->dataModelName;
