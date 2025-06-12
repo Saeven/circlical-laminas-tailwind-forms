@@ -477,4 +477,21 @@ class FormRowTest extends TestCase
         $markup = $this->helper->render($this->form->get('subtitles'));
         self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_file_input.txt', $markup);
     }
+
+    public function testSupportsColorControls()
+    {
+        $this->form->setGenerateAlpineMarkup(true);
+        $this->form->add([
+            'name' => 'backgroundColor',
+            'type' => Element\Color::class,
+            'options' => [
+                'label' => "What color do you want to use?",
+                'help-block' => "Make sure it is not too bright, to consider WCAG-AA.",
+                'x-bind:disabled' => 'model.object',
+            ],
+        ]);
+
+        $markup = $this->helper->render($this->form->get('backgroundColor'));
+        self::assertStringMatchesFormatFile(__DIR__ . '/_templates/alpine_text_row_color_input.txt', $markup);
+    }
 }

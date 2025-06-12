@@ -99,6 +99,10 @@ To get you started, here some that I use in a project that leverages this librar
   .default-file-element {
       @apply block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-violet-100;
   }
+  
+  .default-color-element {
+      @apply block size-4 cursor-pointer ring-1 ring-zinc-200 ring-offset-1 disabled:pointer-events-none disabled:opacity-50;
+  }
 ```
 
 #### Implementation Notes

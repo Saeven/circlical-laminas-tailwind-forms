@@ -1,0 +1,16 @@
+<div>
+  <div class="flex items-center">
+    <div class="p-1">
+      <input type="color" name="backgroundColor" x-model="data&#x5B;&#x27;backgroundColor&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;backgroundColor&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-color-element" aria-describedby="backgroundColor-description" value="">
+    </div>
+    <div class="ml-2">
+    <label class="default-form-label" for="backgroundColor">What color do you want to use?</label>
+    <span id="backgroundColor-description" class="default-form-help-block">Make sure it is not too bright, to consider WCAG-AA.</span>
+    </div>
+  </div>
+  <div id="backgroundColor-errors">
+    <template x-for="(error) in errors['backgroundColor']">
+        <p class="default-form-error" x-text="error"></p>
+    </template>
+</div>
+</div>
