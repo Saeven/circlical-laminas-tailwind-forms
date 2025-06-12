@@ -10,6 +10,7 @@ use Circlical\TailwindForms\ThemeManager;
 use Laminas\Escaper\Exception\RuntimeException as EscaperException;
 use Laminas\Form\Element\Button;
 use Laminas\Form\Element\Checkbox;
+use Laminas\Form\Element\Color;
 use Laminas\Form\Element\Radio;
 use Laminas\Form\ElementInterface;
 use Laminas\Stdlib\ArrayUtils;
@@ -93,6 +94,22 @@ TOGGLE_ELEMENT_TEMPLATE;
 </div>
 RADIO_ELEMENT_TEMPLATE;
 
+    protected static string $colorElementTemplate = <<<COLOR_ELEMENT_TEMPLATE
+<div>
+  <div class="flex items-center">
+    <div class="p-1">
+      {{ELEMENT}}
+    </div>
+
+    <div class="ml-2">
+    {{LABEL}}
+    {{HELP-BLOCK}}
+    </div>
+  </div>
+  {{ERRORS}}
+</div>
+COLOR_ELEMENT_TEMPLATE;
+
     /**
      * @inheritDoc
      */
@@ -167,6 +184,23 @@ RADIO_ELEMENT_TEMPLATE;
             if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
                 $helpBlock = sprintf(
                     '<p id="%s-description" class="%s">%s</p>',
+                    $element->getName(),
+                    $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
+                    $helpBlockText
+                );
+            }
+        } elseif ($element instanceof Color) {
+            $selectedTemplate = static::$colorElementTemplate;
+            $label = $this->renderLabel($element);
+            $element->setAttribute('aria-describedby', $element->getName() . '-description');
+            $extraTemplateParameters['{{TOGGLE_CLASS}}'] = $element->getAttribute('class');
+            $extraTemplateParameters['{{NAME}}'] = $element->getName();
+            $extraTemplateParameters['{{ID}}'] = $element->getAttribute('id') ?? $element->getName();
+            $extraTemplateParameters['{{MODEL}}'] = $element->getAttribute('x-model');
+
+            if ($helpBlockText = $element->getOption(Form::OPTION_HELP_BLOCK)) {
+                $helpBlock = sprintf(
+                    '<span id="%s-description" class="%s">%s</span>',
                     $element->getName(),
                     $element->getOption(Form::ELEMENT_HELP_BLOCK_CLASS),
                     $helpBlockText
