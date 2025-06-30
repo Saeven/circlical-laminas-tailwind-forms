@@ -35,7 +35,7 @@ ALPINE_ERROR_TEMPLATE;
     protected static string $standardElementTemplate = <<<STANDARD_ELEMENT_TEMPLATE
 <div>
     {{LABEL}}
-    <div class="mt-1">
+    <div class="default-form-row">
         {{ELEMENT}}
     </div>
     {{HELP-BLOCK}}
@@ -45,7 +45,7 @@ STANDARD_ELEMENT_TEMPLATE;
 
     protected static string $checkboxElementTemplate = <<<CHECKBOX_ELEMENT_TEMPLATE
 <div>
-    <div class="mt-1">
+    <div class="default-form-row">
         <div class="relative flex items-start">
             <div class="flex items-center h-5">
                 {{ELEMENT}}
