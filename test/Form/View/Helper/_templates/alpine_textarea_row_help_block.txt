@@ -1,6 +1,6 @@
 <div>
     <label class="default-form-label" for="comment">Comment</label>
-    <div class="mt-1">
+    <div class="default-form-row">
         <textarea name="comment" id="comment" rows="4" x-model="data&#x5B;&#x27;comment&#x27;&#x5D;" x-bind:class="&#x7B;&#x27;error&#x27;&#x3A;&#x20;errors&#x5B;&#x27;comment&#x27;&#x5D;.length&#x20;&gt;&#x20;0&#x7D;" class="default-form-textarea"></textarea>
     </div>
     <p class="default-form-help-block">This is a help block.</p>

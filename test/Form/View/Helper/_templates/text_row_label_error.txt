@@ -1,6 +1,6 @@
 <div>
     <label class="default-form-label" for="email">Email</label>
-    <div class="mt-1">
+    <div class="default-form-row">
         <input type="email" name="email" id="email" class="default-form-element" aria-invalid="true" aria-describedby="email-error" value="helloworld">
     </div>
     <div id="email-error">

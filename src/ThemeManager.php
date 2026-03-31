@@ -11,7 +11,7 @@ use function in_array;
 
 class ThemeManager
 {
-    private static array $supportedElements;
+    private static array $supportedElements = [];
 
     public static function setSupportedElements(array $elementList): void
     {
