@@ -50,6 +50,9 @@ class Form extends \Laminas\Form\Form
     public const OPTION_ELEMENT_X_MODEL_NAME = 'element-x-model-name';
 
     public const OPTION_ELEMENT_X_SELECT_MODEL_NAME = 'element-x-model-select';
+    public const OPTION_ELEMENT_X_SELECT_MODEL_TYPE = 'element-x-model-select-type';
+    public const OPTION_ELEMENT_X_SELECT_VALUE_FIELD = 'element-x-model-select-value-field';
+    public const OPTION_ELEMENT_X_SELECT_LABEL_FIELD = 'element-x-model-select-label-field';
 
     private ?array $tailwindThemeData;
 

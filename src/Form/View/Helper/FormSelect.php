@@ -15,6 +15,9 @@ use function sprintf;
 
 class FormSelect extends \Laminas\Form\View\Helper\FormSelect
 {
+    private const SELECT_MODEL_TYPE_ARRAY = 'array';
+    private const SELECT_MODEL_TYPE_MAP = 'map';
+
     public function render(ElementInterface $element): string
     {
         if (!$element instanceof SelectElement) {
@@ -47,37 +50,18 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
         }
         $this->validTagAttributes = $this->validSelectAttributes;
 
-        if ($element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME)) {
-            $rendered = sprintf(
-                "<select %s>%s\n%s\n</select>",
-                $this->createAttributesString($attributes),
-                $this->getEmptyLabel($element),
-                sprintf(
-                    '<template x-for="(value, item) in %s">'
-                    . '<option x-text="value" :value="item" :selected="item == %s"></option>'
-                    . '</template>',
-                    $element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME),
-                    $element->getOption(Form::OPTION_ELEMENT_X_MODEL_NAME)
-                )
-            );
-        } else {
-            $rendered = sprintf(
-                "<select %s>\n%s\n</select>",
-                $this->createAttributesString($attributes),
-                $this->renderOptions($options, $value)
-            );
-        }
+        $rendered = $this->renderSelect($element, $attributes, $options, $value);
 
         // Render hidden element
         $useHiddenElement = method_exists($element, 'useHiddenElement')
             && method_exists($element, 'getUnselectedValue')
             && $element->useHiddenElement();
 
-        if ($useHiddenElement) {
-            $rendered = $this->renderHiddenElement($element) . $rendered;
+        if (!$useHiddenElement) {
+            return $rendered;
         }
 
-        return $rendered;
+        return $this->renderHiddenElement($element) . $rendered;
     }
 
     private function getEmptyLabel(SelectElement $element): string
@@ -88,5 +72,67 @@ class FormSelect extends \Laminas\Form\View\Helper\FormSelect
         }
 
         return '';
+    }
+
+    private function renderSelect(SelectElement $element, array $attributes, array $options, $value): string
+    {
+        $selectModel = $element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_NAME);
+        if (!$selectModel) {
+            return sprintf(
+                "<select %s>
+%s
+</select>",
+                $this->createAttributesString($attributes),
+                $this->renderOptions($options, $value)
+            );
+        }
+
+        return sprintf(
+            "<select %s>%s
+%s
+</select>",
+            $this->createAttributesString($attributes),
+            $this->getEmptyLabel($element),
+            $this->renderSelectTemplate($element, $selectModel)
+        );
+    }
+
+    private function renderSelectTemplate(SelectElement $element, string $selectModel): string
+    {
+        $selectType = $element->getOption(Form::OPTION_ELEMENT_X_SELECT_MODEL_TYPE) ?? self::SELECT_MODEL_TYPE_MAP;
+        if ($selectType === self::SELECT_MODEL_TYPE_ARRAY) {
+            return $this->renderArrayTemplate($element, $selectModel);
+        }
+
+        return $this->renderMapTemplate($element, $selectModel);
+    }
+
+    private function renderArrayTemplate(SelectElement $element, string $selectModel): string
+    {
+        $valueField = $element->getOption(Form::OPTION_ELEMENT_X_SELECT_VALUE_FIELD) ?? 'id';
+        $labelField = $element->getOption(Form::OPTION_ELEMENT_X_SELECT_LABEL_FIELD) ?? 'title';
+        $selectedValue = $element->getOption(Form::OPTION_ELEMENT_X_MODEL_NAME);
+
+        return sprintf(
+            '<template x-for="item in %s">'
+            . '<option x-text="item.%s" :value="item.%s" :selected="item.%s == %s"></option>'
+            . '</template>',
+            $selectModel,
+            $labelField,
+            $valueField,
+            $valueField,
+            $selectedValue
+        );
+    }
+
+    private function renderMapTemplate(SelectElement $element, string $selectModel): string
+    {
+        return sprintf(
+            '<template x-for="(value, item) in %s">'
+            . '<option x-text="value" :value="item" :selected="item == %s"></option>'
+            . '</template>',
+            $selectModel,
+            $element->getOption(Form::OPTION_ELEMENT_X_MODEL_NAME)
+        );
     }
 }
